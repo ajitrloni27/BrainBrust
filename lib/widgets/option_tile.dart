@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
 
 class OptionTile extends StatelessWidget {
   final int index;
   final String text;
-  final bool isAnswered;
   final bool isSelected;
+  final bool isSubmitted;
   final bool isCorrect;
   final VoidCallback? onTap;
 
@@ -12,8 +13,8 @@ class OptionTile extends StatelessWidget {
     super.key,
     required this.index,
     required this.text,
-    required this.isAnswered,
     required this.isSelected,
+    required this.isSubmitted,
     required this.isCorrect,
     this.onTap,
   });
@@ -24,33 +25,64 @@ class OptionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final primaryColor = theme.colorScheme.primary;
 
-    final String letter = index < optionLetters.length ? optionLetters[index] : '?';
+    final String letter =
+        index < optionLetters.length ? optionLetters[index] : '?';
 
     Color backgroundColor;
     Color borderColor;
-    Color letterBgColor;
-    Color letterTextColor;
-    Widget? trailingIcon;
+    double borderWidth;
+    Color badgeBgColor;
+    Color badgeTextColor;
+    Widget? trailingWidget;
     double opacity = 1.0;
 
-    if (!isAnswered) {
-      backgroundColor = theme.colorScheme.surface;
-      borderColor = theme.colorScheme.outlineVariant;
-      letterBgColor = theme.colorScheme.surfaceContainerHighest;
-      letterTextColor = theme.colorScheme.onSurfaceVariant;
-      trailingIcon = null;
+    if (!isSubmitted) {
+      if (isSelected) {
+        // Pre-submit: Highlighted with primary color, thicker border, check icon
+        backgroundColor = primaryColor.withAlpha(isDark ? 40 : 20);
+        borderColor = primaryColor;
+        borderWidth = 2.2;
+        badgeBgColor = primaryColor;
+        badgeTextColor = Colors.white;
+        trailingWidget = Icon(
+          Icons.check_circle_rounded,
+          color: primaryColor,
+          size: 22,
+        );
+      } else {
+        // Normal unselected state
+        backgroundColor = theme.cardTheme.color ?? theme.colorScheme.surface;
+        borderColor = theme.colorScheme.outlineVariant.withAlpha(isDark ? 60 : 130);
+        borderWidth = 1.2;
+        badgeBgColor = isDark
+            ? const Color(0xFF334155)
+            : const Color(0xFFE2E8F0);
+        badgeTextColor = theme.colorScheme.onSurfaceVariant;
+        trailingWidget = Container(
+          width: 20,
+          height: 20,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: theme.colorScheme.outline.withAlpha(isDark ? 80 : 120),
+              width: 1.5,
+            ),
+          ),
+        );
+      }
     } else {
+      // Post-submit locked states
       if (isCorrect) {
         // Correct option
         const greenColor = Color(0xFF16A34A);
-        backgroundColor = isDark
-            ? greenColor.withAlpha(45)
-            : greenColor.withAlpha(25);
+        backgroundColor = greenColor.withAlpha(isDark ? 45 : 25);
         borderColor = greenColor;
-        letterBgColor = greenColor;
-        letterTextColor = Colors.white;
-        trailingIcon = const Icon(
+        borderWidth = 2.2;
+        badgeBgColor = greenColor;
+        badgeTextColor = Colors.white;
+        trailingWidget = const Icon(
           Icons.check_circle_rounded,
           color: greenColor,
           size: 24,
@@ -58,25 +90,27 @@ class OptionTile extends StatelessWidget {
       } else if (isSelected) {
         // Wrong selected option
         const redColor = Color(0xFFDC2626);
-        backgroundColor = isDark
-            ? redColor.withAlpha(45)
-            : redColor.withAlpha(25);
+        backgroundColor = redColor.withAlpha(isDark ? 45 : 25);
         borderColor = redColor;
-        letterBgColor = redColor;
-        letterTextColor = Colors.white;
-        trailingIcon = const Icon(
+        borderWidth = 2.2;
+        badgeBgColor = redColor;
+        badgeTextColor = Colors.white;
+        trailingWidget = const Icon(
           Icons.cancel_rounded,
           color: redColor,
           size: 24,
         );
       } else {
         // Unselected other options
-        backgroundColor = theme.colorScheme.surface;
-        borderColor = theme.colorScheme.outlineVariant.withAlpha(100);
-        letterBgColor = theme.colorScheme.surfaceContainerHighest.withAlpha(120);
-        letterTextColor = theme.colorScheme.onSurfaceVariant.withAlpha(120);
-        opacity = 0.5;
-        trailingIcon = null;
+        backgroundColor = theme.cardTheme.color ?? theme.colorScheme.surface;
+        borderColor = theme.colorScheme.outlineVariant.withAlpha(isDark ? 40 : 80);
+        borderWidth = 1.0;
+        badgeBgColor = isDark
+            ? const Color(0xFF1E293B)
+            : const Color(0xFFF1F5F9);
+        badgeTextColor = theme.colorScheme.outline;
+        opacity = 0.45;
+        trailingWidget = null;
       }
     }
 
@@ -84,62 +118,80 @@ class OptionTile extends StatelessWidget {
       duration: const Duration(milliseconds: 200),
       opacity: opacity,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 12.0),
-        child: Material(
-          color: backgroundColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
-            side: BorderSide(
+        margin: const EdgeInsets.only(bottom: AppSpacing.md),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 220),
+          curve: Curves.easeOutCubic,
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(AppRadius.card - 2),
+            border: Border.all(
               color: borderColor,
-              width: (isAnswered && (isCorrect || isSelected)) ? 2.0 : 1.2,
+              width: borderWidth,
             ),
+            boxShadow: [
+              if (isSelected && !isSubmitted)
+                BoxShadow(
+                  color: primaryColor.withAlpha(isDark ? 60 : 35),
+                  blurRadius: 12,
+                  offset: const Offset(0, 3),
+                ),
+            ],
           ),
-          clipBehavior: Clip.antiAlias,
-          child: InkWell(
-            onTap: isAnswered ? null : onTap,
-            borderRadius: BorderRadius.circular(14),
-            splashColor: theme.colorScheme.primary.withAlpha(30),
-            highlightColor: theme.colorScheme.primary.withAlpha(15),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
-              child: Row(
-                children: [
-                  Container(
-                    width: 34,
-                    height: 34,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: letterBgColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      letter,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                        color: letterTextColor,
+          child: Material(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(AppRadius.card - 2),
+            child: InkWell(
+              onTap: isSubmitted ? null : onTap,
+              borderRadius: BorderRadius.circular(AppRadius.card - 2),
+              splashColor: primaryColor.withAlpha(25),
+              highlightColor: primaryColor.withAlpha(12),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.lg,
+                  vertical: AppSpacing.md + 2,
+                ),
+                child: Row(
+                  children: [
+                    // Circular letter badge
+                    Container(
+                      width: 36,
+                      height: 36,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: badgeBgColor,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Text(
+                        letter,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14,
+                          color: badgeTextColor,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 14),
-                  Expanded(
-                    child: Text(
-                      text,
-                      style: TextStyle(
-                        fontSize: 15.5,
-                        fontWeight: (isAnswered && (isCorrect || isSelected))
-                            ? FontWeight.w600
-                            : FontWeight.w500,
-                        height: 1.35,
-                        color: theme.colorScheme.onSurface,
+                    const SizedBox(width: AppSpacing.md + 2),
+
+                    // Option text
+                    Expanded(
+                      child: Text(
+                        text,
+                        style: TextStyle(
+                          fontSize: 15.5,
+                          fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                          height: 1.35,
+                          color: theme.colorScheme.onSurface,
+                        ),
                       ),
                     ),
-                  ),
-                  if (trailingIcon != null) ...[
-                    const SizedBox(width: 10),
-                    trailingIcon,
+
+                    if (trailingWidget != null) ...[
+                      const SizedBox(width: AppSpacing.sm),
+                      trailingWidget,
+                    ],
                   ],
-                ],
+                ),
               ),
             ),
           ),

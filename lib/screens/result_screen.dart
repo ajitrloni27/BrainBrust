@@ -1,292 +1,204 @@
 import 'package:flutter/material.dart';
 import '../models/topic.dart';
+import '../theme/app_theme.dart';
 import 'quiz_screen.dart';
 
 class ResultScreen extends StatelessWidget {
   final Topic topic;
-  final int score;
-  final int totalQuestions;
 
   const ResultScreen({
     super.key,
     required this.topic,
-    required this.score,
-    required this.totalQuestions,
   });
-
-  double get percentage =>
-      totalQuestions > 0 ? (score / totalQuestions) * 100 : 0.0;
-
-  String get scoreMessage {
-    final pct = percentage;
-    if (pct >= 90) {
-      return "Outstanding! You've completely mastered this! 🚀";
-    } else if (pct >= 75) {
-      return "Great work! Solid grasp of core concepts. Keep it up! 🌟";
-    } else if (pct >= 50) {
-      return "Good effort! A little more practice and you'll master this. 💪";
-    } else {
-      return "Keep practicing! Review the explanations and try again. 📚";
-    }
-  }
-
-  Color _getPerformanceColor() {
-    final pct = percentage;
-    if (pct >= 75) {
-      return const Color(0xFF16A34A);
-    } else if (pct >= 50) {
-      return const Color(0xFFD97706);
-    } else {
-      return const Color(0xFFDC2626);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final performanceColor = _getPerformanceColor();
-    final int incorrect = (totalQuestions - score).clamp(0, totalQuestions);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Quiz Results',
-          style: const TextStyle(fontWeight: FontWeight.w700),
+        title: const Text(
+          'Completed',
+          style: TextStyle(fontWeight: FontWeight.w700),
         ),
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.close_rounded),
+            onPressed: () =>
+                Navigator.of(context).popUntil((route) => route.isFirst),
+          ),
+          const SizedBox(width: AppSpacing.sm),
+        ],
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.xl,
+            vertical: AppSpacing.lg,
+          ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Topic Header Pill
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 14,
-                  vertical: 6,
-                ),
-                decoration: BoxDecoration(
-                  color: topic.getAccentColor(context).withAlpha(30),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: topic.getAccentColor(context).withAlpha(80),
-                  ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      topic.icon,
-                      size: 18,
-                      color: topic.getAccentColor(context),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      topic.name,
-                      style: TextStyle(
-                        fontSize: 13.5,
-                        fontWeight: FontWeight.w700,
-                        color: topic.getAccentColor(context),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 24),
+              const Spacer(),
 
-              // Score Circle Card
+              // Celebratory Card
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 36.0, horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.xl,
+                  vertical: AppSpacing.xxl,
+                ),
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.surface,
-                  borderRadius: BorderRadius.circular(24),
+                  color: theme.cardTheme.color,
+                  borderRadius: BorderRadius.circular(AppRadius.card + 4),
                   border: Border.all(
-                    color: theme.colorScheme.outlineVariant.withAlpha(isDark ? 80 : 150),
+                    color: theme.colorScheme.outlineVariant.withAlpha(isDark ? 60 : 130),
                     width: 1.2,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withAlpha(isDark ? 30 : 10),
-                      blurRadius: 16,
-                      offset: const Offset(0, 4),
+                      color: isDark
+                          ? Colors.black.withAlpha(50)
+                          : theme.colorScheme.shadow.withAlpha(15),
+                      blurRadius: 24,
+                      offset: const Offset(0, 8),
                     ),
                   ],
                 ),
                 child: Column(
                   children: [
-                    // Score circular badge
+                    // Gradient badge icon
                     Container(
-                      width: 130,
-                      height: 130,
+                      width: 88,
+                      height: 88,
                       decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: topic.gradientColors,
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
                         shape: BoxShape.circle,
-                        color: performanceColor.withAlpha(25),
+                        boxShadow: [
+                          BoxShadow(
+                            color: topic.primaryAccentColor.withAlpha(isDark ? 90 : 70),
+                            blurRadius: 20,
+                            offset: const Offset(0, 6),
+                          ),
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.task_alt_rounded,
+                        size: 46,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.xl),
+
+                    // Topic badge
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: topic.primaryAccentColor.withAlpha(isDark ? 40 : 25),
+                        borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: performanceColor,
-                          width: 4,
+                          color: topic.primaryAccentColor.withAlpha(80),
                         ),
                       ),
-                      alignment: Alignment.center,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
-                            '$score / $totalQuestions',
-                            style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w800,
-                              color: performanceColor,
-                              letterSpacing: -0.5,
-                            ),
+                          Icon(
+                            topic.icon,
+                            size: 16,
+                            color: topic.primaryAccentColor,
                           ),
+                          const SizedBox(width: 6),
                           Text(
-                            '${percentage.toStringAsFixed(0)}%',
+                            topic.name,
                             style: TextStyle(
-                              fontSize: 15,
+                              fontSize: 13,
                               fontWeight: FontWeight.w700,
-                              color: performanceColor.withAlpha(200),
+                              color: topic.primaryAccentColor,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: AppSpacing.lg),
 
-                    // Motivational message
+                    // Title
                     Text(
-                      scoreMessage,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16.5,
-                        fontWeight: FontWeight.w700,
-                        height: 1.4,
-                        color: theme.colorScheme.onSurface,
+                      'Topic Completed!',
+                      style: theme.textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: -0.5,
                       ),
+                      textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: AppSpacing.sm),
 
-                    // Breakdown chips
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Correct chip
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 14,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF16A34A).withAlpha(25),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: const Color(0xFF16A34A).withAlpha(80),
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.check_circle_rounded,
-                                size: 16,
-                                color: Color(0xFF16A34A),
-                              ),
-                              const SizedBox(width: 6),
-                              Text(
-                                '$score Correct',
-                                style: const TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xFF16A34A),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        // Incorrect chip
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 14,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFDC2626).withAlpha(25),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: const Color(0xFFDC2626).withAlpha(80),
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.cancel_rounded,
-                                size: 16,
-                                color: Color(0xFFDC2626),
-                              ),
-                              const SizedBox(width: 6),
-                              Text(
-                                '$incorrect Wrong',
-                                style: const TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xFFDC2626),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                    // Encouraging message
+                    Text(
+                      'Great job finishing all the questions in this topic. Practice regularly to keep your tech intuition sharp!',
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                        fontSize: 14.5,
+                        height: 1.45,
+                      ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 32),
+
+              const Spacer(),
 
               // Action Buttons
-              // Try Again Button (Reshuffles questions)
+              // Practice Again (Reshuffles questions)
               SizedBox(
                 width: double.infinity,
                 child: FilledButton.icon(
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => QuizScreen(
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            QuizScreen(
                           topic: topic,
                           shuffleQuestions: true,
                         ),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          return FadeTransition(opacity: animation, child: child);
+                        },
+                        transitionDuration: const Duration(milliseconds: 300),
                       ),
                     );
                   },
                   icon: const Icon(Icons.replay_rounded),
-                  label: const Text(
-                    'Try Again',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
+                  label: const Text('Practice Again'),
                   style: FilledButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(AppRadius.button),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSpacing.md),
 
-              // Back to Topics Button
+              // Back to Topics
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButton.icon(
                   onPressed: () {
                     Navigator.of(context).popUntil((route) => route.isFirst);
                   },
-                  icon: const Icon(Icons.list_alt_rounded),
+                  icon: const Icon(Icons.grid_view_rounded),
                   label: const Text(
                     'Back to Topics',
                     style: TextStyle(
@@ -297,11 +209,12 @@ class ResultScreen extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(AppRadius.button),
                     ),
                   ),
                 ),
               ),
+              const SizedBox(height: AppSpacing.md),
             ],
           ),
         ),

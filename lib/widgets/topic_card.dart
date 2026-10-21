@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/topic.dart';
+import '../theme/app_theme.dart';
 
-class TopicCard extends StatelessWidget {
+class TopicCard extends StatefulWidget {
   final Topic topic;
   final VoidCallback onTap;
 
@@ -12,127 +13,114 @@ class TopicCard extends StatelessWidget {
   });
 
   @override
+  State<TopicCard> createState() => _TopicCardState();
+}
+
+class _TopicCardState extends State<TopicCard> {
+  bool _isPressed = false;
+
+  void _setPressed(bool pressed) {
+    if (_isPressed != pressed) {
+      setState(() {
+        _isPressed = pressed;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final accentColor = topic.getAccentColor(context);
-    final bool hasQuestions = topic.hasQuestions;
+    final topic = widget.topic;
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12.0),
-      child: Material(
-        color: theme.colorScheme.surface,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-          side: BorderSide(
-            color: theme.colorScheme.outlineVariant.withAlpha(isDark ? 80 : 150),
+    return AnimatedScale(
+      scale: _isPressed ? 0.96 : 1.0,
+      duration: const Duration(milliseconds: 120),
+      curve: Curves.easeOutQuad,
+      child: Container(
+        decoration: BoxDecoration(
+          color: theme.cardTheme.color,
+          borderRadius: BorderRadius.circular(AppRadius.card),
+          border: Border.all(
+            color: theme.colorScheme.outlineVariant.withAlpha(isDark ? 50 : 120),
             width: 1.2,
           ),
+          boxShadow: [
+            BoxShadow(
+              color: isDark
+                  ? Colors.black.withAlpha(40)
+                  : theme.colorScheme.shadow.withAlpha(12),
+              blurRadius: 16,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(16),
-          splashColor: accentColor.withAlpha(25),
-          highlightColor: accentColor.withAlpha(15),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: [
-                // Topic Icon Container
-                Container(
-                  width: 52,
-                  height: 52,
-                  decoration: BoxDecoration(
-                    color: accentColor.withAlpha(isDark ? 40 : 25),
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(
-                      color: accentColor.withAlpha(60),
-                      width: 1.2,
+        child: Material(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(AppRadius.card),
+          child: InkWell(
+            onTap: widget.onTap,
+            onTapDown: (_) => _setPressed(true),
+            onTapUp: (_) => _setPressed(false),
+            onTapCancel: () => _setPressed(false),
+            borderRadius: BorderRadius.circular(AppRadius.card),
+            splashColor: topic.primaryAccentColor.withAlpha(25),
+            highlightColor: topic.primaryAccentColor.withAlpha(12),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.lg,
+                vertical: AppSpacing.lg,
+              ),
+              child: Row(
+                children: [
+                  // Gradient-tinted icon badge
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: topic.gradientColors,
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(AppRadius.badge),
+                      boxShadow: [
+                        BoxShadow(
+                          color: topic.primaryAccentColor.withAlpha(isDark ? 80 : 50),
+                          blurRadius: 10,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Icon(
+                      topic.icon,
+                      size: 26,
+                      color: Colors.white,
                     ),
                   ),
-                  child: Icon(
-                    topic.icon,
-                    size: 28,
-                    color: accentColor,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                // Topic Name & Question Count
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        topic.name,
-                        style: TextStyle(
-                          fontSize: 16.5,
-                          fontWeight: FontWeight.w700,
-                          color: theme.colorScheme.onSurface,
-                          letterSpacing: 0.1,
-                        ),
+                  const SizedBox(width: AppSpacing.md),
+
+                  // Topic name
+                  Expanded(
+                    child: Text(
+                      topic.name,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: -0.2,
                       ),
-                      const SizedBox(height: 6),
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 9,
-                              vertical: 3.5,
-                            ),
-                            decoration: BoxDecoration(
-                              color: hasQuestions
-                                  ? theme.colorScheme.primaryContainer.withAlpha(120)
-                                  : theme.colorScheme.surfaceContainerHighest,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                if (hasQuestions)
-                                  Icon(
-                                    Icons.help_outline_rounded,
-                                    size: 13,
-                                    color: theme.colorScheme.primary,
-                                  )
-                                else
-                                  Icon(
-                                    Icons.hourglass_empty_rounded,
-                                    size: 13,
-                                    color: theme.colorScheme.outline,
-                                  ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  hasQuestions
-                                      ? '${topic.questionCount} ${topic.questionCount == 1 ? 'Question' : 'Questions'}'
-                                      : 'No questions yet',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                    color: hasQuestions
-                                        ? theme.colorScheme.onPrimaryContainer
-                                        : theme.colorScheme.outline,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ),
-                // Forward chevron
-                Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  size: 16,
-                  color: hasQuestions
-                      ? theme.colorScheme.outline
-                      : theme.colorScheme.outline.withAlpha(100),
-                ),
-              ],
+
+                  // Small arrow icon
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 14,
+                    color: theme.colorScheme.outline.withAlpha(isDark ? 120 : 160),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

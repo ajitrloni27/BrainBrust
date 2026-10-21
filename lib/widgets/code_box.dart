@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
 
 class CodeBox extends StatelessWidget {
   final String code;
@@ -7,52 +8,60 @@ class CodeBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final backgroundColor = isDark
-        ? const Color(0xFF1E1E2E)
-        : const Color(0xFFF1F3F9);
-    final borderColor = isDark
-        ? const Color(0xFF313244)
-        : const Color(0xFFDCE0E8);
-    final textColor = isDark
-        ? const Color(0xFFCDD6F4)
-        : const Color(0xFF4C4F69);
+    const backgroundColor = Color(0xFF0F172A); // Dark slate
+    const borderColor = Color(0xFF334155);
+    const textColor = Color(0xFFE2E8F0);
 
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.symmetric(vertical: 14.0),
+      margin: const EdgeInsets.symmetric(vertical: AppSpacing.md),
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppRadius.card - 2),
         border: Border.all(color: borderColor, width: 1.2),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x1F000000),
+            blurRadius: 10,
+            offset: Offset(0, 3),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-            decoration: BoxDecoration(
-              color: isDark ? const Color(0xFF181825) : const Color(0xFFE6E9EF),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(11),
-                topRight: Radius.circular(11),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.md,
+              vertical: AppSpacing.xs + 2,
+            ),
+            decoration: const BoxDecoration(
+              color: Color(0xFF1E293B),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(AppRadius.card - 3),
+                topRight: Radius.circular(AppRadius.card - 3),
               ),
             ),
             child: Row(
               children: [
-                const Icon(
-                  Icons.terminal_rounded,
-                  size: 16,
-                  color: Colors.grey,
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  'Code Snippet',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.5,
-                    color: textColor.withAlpha(200),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: AppTheme.primarySeed.withAlpha(40),
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                      color: AppTheme.primarySeed.withAlpha(80),
+                      width: 1,
+                    ),
+                  ),
+                  child: const Text(
+                    'code',
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFFA5B4FC),
+                      fontFamily: 'monospace',
+                    ),
                   ),
                 ),
               ],
@@ -60,10 +69,10 @@ class CodeBox extends StatelessWidget {
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.all(14.0),
+            padding: const EdgeInsets.all(AppSpacing.md + 2),
             child: SelectableText(
               code,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'monospace',
                 fontSize: 13.5,
                 height: 1.5,

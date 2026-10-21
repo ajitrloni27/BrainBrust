@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
 
 class ExplanationCard extends StatelessWidget {
   final String title;
   final String content;
   final IconData icon;
-  final Color? accentColor;
+  final Color accentColor;
 
   const ExplanationCard({
     super.key,
     required this.title,
     required this.content,
     required this.icon,
-    this.accentColor,
+    required this.accentColor,
   });
 
   @override
@@ -21,60 +22,89 @@ class ExplanationCard extends StatelessWidget {
     }
 
     final theme = Theme.of(context);
-    final color = accentColor ?? theme.colorScheme.primary;
+    final isDark = theme.brightness == Brightness.dark;
 
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.only(bottom: 14.0),
-      padding: const EdgeInsets.all(16.0),
+      margin: const EdgeInsets.only(bottom: AppSpacing.md),
       decoration: BoxDecoration(
-        color: color.withAlpha(20),
-        borderRadius: BorderRadius.circular(14),
+        color: isDark
+            ? accentColor.withAlpha(20)
+            : accentColor.withAlpha(12),
+        borderRadius: BorderRadius.circular(AppRadius.card - 2),
         border: Border.all(
-          color: color.withAlpha(60),
-          width: 1.2,
+          color: accentColor.withAlpha(isDark ? 50 : 40),
+          width: 1.0,
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppRadius.card - 2),
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // Colored left accent bar
               Container(
-                padding: const EdgeInsets.all(6),
+                width: 5.0,
                 decoration: BoxDecoration(
-                  color: color.withAlpha(35),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  icon,
-                  size: 18,
-                  color: color,
+                  color: accentColor,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(AppRadius.card - 2),
+                    bottomLeft: Radius.circular(AppRadius.card - 2),
+                  ),
                 ),
               ),
-              const SizedBox(width: 10),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 14.5,
-                  fontWeight: FontWeight.w700,
-                  color: color,
-                  letterSpacing: 0.2,
+
+              // Content area
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSpacing.lg),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                              color: accentColor.withAlpha(isDark ? 45 : 30),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              icon,
+                              size: 18,
+                              color: accentColor,
+                            ),
+                          ),
+                          const SizedBox(width: AppSpacing.sm + 2),
+                          Text(
+                            title,
+                            style: TextStyle(
+                              fontSize: 14.5,
+                              fontWeight: FontWeight.w700,
+                              color: accentColor,
+                              letterSpacing: 0.2,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: AppSpacing.sm + 2),
+                      Text(
+                        content,
+                        style: TextStyle(
+                          fontSize: 14.5,
+                          height: 1.5,
+                          color: theme.colorScheme.onSurface,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 10),
-          Text(
-            content,
-            style: TextStyle(
-              fontSize: 14.5,
-              height: 1.5,
-              color: theme.colorScheme.onSurface,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

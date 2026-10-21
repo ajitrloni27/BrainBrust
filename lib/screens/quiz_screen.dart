@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../models/question.dart';
 import '../models/topic.dart';
+import '../theme/app_theme.dart';
 import '../widgets/code_box.dart';
 import '../widgets/explanation_card.dart';
 import '../widgets/option_tile.dart';
@@ -24,8 +26,7 @@ class _QuizScreenState extends State<QuizScreen> {
   late List<Question> _questions;
   int _currentIndex = 0;
   int? _selectedOptionIndex;
-  bool _isAnswered = false;
-  int _score = 0;
+  bool _isSubmitted = false;
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -43,51 +44,57 @@ class _QuizScreenState extends State<QuizScreen> {
     super.dispose();
   }
 
-  void _handleOptionSelected(int optionIndex) {
-    if (_isAnswered) return;
-
+  void _handleOptionTap(int index) {
+    if (_isSubmitted) return;
+    HapticFeedback.selectionClick();
     setState(() {
-      _isAnswered = true;
-      _selectedOptionIndex = optionIndex;
-      if (optionIndex == _questions[_currentIndex].answer) {
-        _score++;
-      }
+      _selectedOptionIndex = index;
+    });
+  }
+
+  void _handleSubmit() {
+    if (_selectedOptionIndex == null || _isSubmitted) return;
+    HapticFeedback.selectionClick();
+    setState(() {
+      _isSubmitted = true;
     });
 
-    // Auto-scroll down slightly to reveal explanations if needed
+    // Smoothly scroll down so feedback and explanations are visible
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
           _scrollController.position.maxScrollExtent,
           duration: const Duration(milliseconds: 350),
-          curve: Curves.easeOut,
+          curve: Curves.easeOutCubic,
         );
       }
     });
   }
 
-  void _handleNextQuestion() {
-    if (_currentIndex < _questions.length - 1) {
+  void _handleNextOrFinish() {
+    final bool isLastQuestion = _currentIndex == _questions.length - 1;
+
+    if (!isLastQuestion) {
       setState(() {
         _currentIndex++;
         _selectedOptionIndex = null;
-        _isAnswered = false;
+        _isSubmitted = false;
       });
 
-      // Reset scroll position to top for the next question
       if (_scrollController.hasClients) {
         _scrollController.jumpTo(0.0);
       }
     } else {
-      // Completed last question, navigate to results
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (context) => ResultScreen(
-            topic: widget.topic,
-            score: _score,
-            totalQuestions: _questions.length,
-          ),
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              ResultScreen(topic: widget.topic),
+          transitionsBuilder:
+              (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+          transitionDuration: const Duration(milliseconds: 300),
         ),
       );
     }
@@ -97,10 +104,12 @@ class _QuizScreenState extends State<QuizScreen> {
     final shouldPop = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppRadius.card),
+        ),
         title: const Text('Leave Quiz?'),
         content: const Text(
-          'Your progress for this quiz session will be lost. Are you sure you want to go back to topics?',
+          'Are you sure you want to exit? Your progress for this session will be lost.',
         ),
         actions: [
           TextButton(
@@ -133,13 +142,13 @@ class _QuizScreenState extends State<QuizScreen> {
 
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final Question currentQuestion = _questions[_currentIndex];
+    final currentQuestion = _questions[_currentIndex];
     final int totalQuestions = _questions.length;
     final double progress = (_currentIndex + 1) / totalQuestions;
     final bool isLastQuestion = _currentIndex == totalQuestions - 1;
 
     final bool isCorrect =
-        _isAnswered && _selectedOptionIndex == currentQuestion.answer;
+        _isSubmitted && _selectedOptionIndex == currentQuestion.answer;
 
     final String correctOptionLetter = currentQuestion.answer < 4
         ? ['A', 'B', 'C', 'D'][currentQuestion.answer]
@@ -161,40 +170,37 @@ class _QuizScreenState extends State<QuizScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.close_rounded),
+            tooltip: 'Close',
+            onPressed: () async {
+              final shouldPop = await _onWillPop();
+              if (shouldPop && context.mounted) {
+                Navigator.of(context).pop();
+              }
+            },
+          ),
           title: Text(
             widget.topic.name,
             style: const TextStyle(fontWeight: FontWeight.w700),
           ),
-          actions: [
-            Container(
-              margin: const EdgeInsets.only(right: 16.0),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: theme.colorScheme.primaryContainer.withAlpha(150),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(
-                'Score: $_score',
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
-                  color: theme.colorScheme.onPrimaryContainer,
-                ),
-              ),
-            ),
-          ],
         ),
         body: SafeArea(
           child: Column(
             children: [
-              // Progress Bar & Step Tracker
+              // Navigation Progress Header: Animated bar + "Question X of Y"
               Container(
-                padding: const EdgeInsets.fromLTRB(20, 8, 20, 14),
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.xl,
+                  AppSpacing.xs,
+                  AppSpacing.xl,
+                  AppSpacing.md,
+                ),
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.surface,
+                  color: theme.scaffoldBackgroundColor,
                   border: Border(
                     bottom: BorderSide(
-                      color: theme.colorScheme.outlineVariant.withAlpha(isDark ? 60 : 120),
+                      color: theme.colorScheme.outlineVariant.withAlpha(isDark ? 50 : 100),
                     ),
                   ),
                 ),
@@ -206,9 +212,10 @@ class _QuizScreenState extends State<QuizScreen> {
                         Text(
                           'Question ${_currentIndex + 1} of $totalQuestions',
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 13.5,
                             fontWeight: FontWeight.w700,
                             color: theme.colorScheme.onSurface,
+                            letterSpacing: 0.1,
                           ),
                         ),
                         Text(
@@ -221,165 +228,263 @@ class _QuizScreenState extends State<QuizScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: LinearProgressIndicator(
-                        value: progress,
-                        minHeight: 7,
-                        backgroundColor:
-                            theme.colorScheme.surfaceContainerHighest,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          theme.colorScheme.primary,
-                        ),
-                      ),
+                    const SizedBox(height: AppSpacing.sm),
+                    // Animated linear progress bar with rounded ends
+                    TweenAnimationBuilder<double>(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeOutCubic,
+                      tween: Tween<double>(begin: 0.0, end: progress),
+                      builder: (context, value, child) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: LinearProgressIndicator(
+                            value: value,
+                            minHeight: 7,
+                            backgroundColor: isDark
+                                ? const Color(0xFF1E293B)
+                                : const Color(0xFFE2E8F0),
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              theme.colorScheme.primary,
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
               ),
 
-              // Scrollable Question Content
+              // Scrollable Question & Options Content with AnimatedSwitcher
               Expanded(
-                child: ListView(
-                  controller: _scrollController,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 18.0,
-                  ),
-                  children: [
-                    // Question text
-                    Text(
-                      currentQuestion.question,
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 17.5,
-                        height: 1.4,
-                        color: theme.colorScheme.onSurface,
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 350),
+                  transitionBuilder: (child, animation) {
+                    final offsetAnimation = Tween<Offset>(
+                      begin: const Offset(0.08, 0.0),
+                      end: Offset.zero,
+                    ).animate(CurvedAnimation(
+                      parent: animation,
+                      curve: Curves.easeOutCubic,
+                    ));
+                    return FadeTransition(
+                      opacity: animation,
+                      child: SlideTransition(
+                        position: offsetAnimation,
+                        child: child,
                       ),
+                    );
+                  },
+                  child: ListView(
+                    key: ValueKey<int>(_currentIndex),
+                    controller: _scrollController,
+                    padding: const EdgeInsets.fromLTRB(
+                      AppSpacing.xl,
+                      AppSpacing.lg,
+                      AppSpacing.xl,
+                      AppSpacing.xl,
                     ),
-
-                    // Monospace Code snippet (if any)
-                    if (currentQuestion.hasCode)
-                      CodeBox(code: currentQuestion.code!),
-                    if (!currentQuestion.hasCode)
-                      const SizedBox(height: 16),
-
-                    // Options list
-                    ...List.generate(currentQuestion.options.length, (index) {
-                      return OptionTile(
-                        index: index,
-                        text: currentQuestion.options[index],
-                        isAnswered: _isAnswered,
-                        isSelected: _selectedOptionIndex == index,
-                        isCorrect: currentQuestion.answer == index,
-                        onTap: () => _handleOptionSelected(index),
-                      );
-                    }),
-
-                    // After-Answer Feedback Section
-                    if (_isAnswered) ...[
-                      const SizedBox(height: 8),
-
-                      // Result Banner
+                    children: [
+                      // Question text in card with generous padding
                       Container(
                         width: double.infinity,
-                        margin: const EdgeInsets.only(bottom: 16.0),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
-                          vertical: 14.0,
-                        ),
+                        padding: const EdgeInsets.all(AppSpacing.xl),
                         decoration: BoxDecoration(
-                          color: isCorrect
-                              ? const Color(0xFF16A34A).withAlpha(isDark ? 45 : 20)
-                              : const Color(0xFFDC2626).withAlpha(isDark ? 45 : 20),
-                          borderRadius: BorderRadius.circular(14),
+                          color: theme.cardTheme.color,
+                          borderRadius: BorderRadius.circular(AppRadius.card),
                           border: Border.all(
-                            color: isCorrect
-                                ? const Color(0xFF16A34A)
-                                : const Color(0xFFDC2626),
+                            color: theme.colorScheme.outlineVariant.withAlpha(isDark ? 50 : 120),
                             width: 1.2,
                           ),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Icon(
-                              isCorrect
-                                  ? Icons.check_circle_rounded
-                                  : Icons.cancel_rounded,
-                              color: isCorrect
-                                  ? const Color(0xFF16A34A)
-                                  : const Color(0xFFDC2626),
-                              size: 24,
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Text(
-                                isCorrect
-                                    ? 'Correct! Well done.'
-                                    : 'Wrong! The correct answer is Option $correctOptionLetter: $correctOptionText',
-                                style: TextStyle(
-                                  color: isCorrect
-                                      ? const Color(0xFF16A34A)
-                                      : const Color(0xFFDC2626),
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14.5,
-                                  height: 1.35,
-                                ),
-                              ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: isDark
+                                  ? Colors.black.withAlpha(35)
+                                  : theme.colorScheme.shadow.withAlpha(8),
+                              blurRadius: 14,
+                              offset: const Offset(0, 3),
                             ),
                           ],
                         ),
-                      ),
-
-                      // Technical Explanation Card (hidden if empty)
-                      if (currentQuestion.hasExplanation)
-                        ExplanationCard(
-                          title: 'Explanation',
-                          content: currentQuestion.explanation!,
-                          icon: Icons.lightbulb_rounded,
-                          accentColor: theme.colorScheme.primary,
-                        ),
-
-                      // In Simple Words Card (hidden if empty)
-                      if (currentQuestion.hasSimpleExplanation)
-                        ExplanationCard(
-                          title: 'In simple words',
-                          content: currentQuestion.simpleExplanation!,
-                          icon: Icons.forum_rounded,
-                          accentColor: const Color(0xFF0D9488),
-                        ),
-
-                      const SizedBox(height: 12),
-
-                      // Next / See Results Button
-                      SizedBox(
-                        width: double.infinity,
-                        child: FilledButton.icon(
-                          onPressed: _handleNextQuestion,
-                          icon: Icon(
-                            isLastQuestion
-                                ? Icons.emoji_events_rounded
-                                : Icons.arrow_forward_rounded,
-                          ),
-                          label: Text(
-                            isLastQuestion ? 'See Results' : 'Next',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          style: FilledButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14),
-                            ),
+                        child: Text(
+                          currentQuestion.question,
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            height: 1.45,
+                            letterSpacing: -0.2,
                           ),
                         ),
                       ),
-                      const SizedBox(height: 24),
+
+                      // Code snippet box (if present)
+                      if (currentQuestion.hasCode)
+                        CodeBox(code: currentQuestion.code!),
+                      if (!currentQuestion.hasCode)
+                        const SizedBox(height: AppSpacing.lg),
+
+                      // Options List (User can change selection freely before submitting)
+                      ...List.generate(currentQuestion.options.length, (index) {
+                        return OptionTile(
+                          index: index,
+                          text: currentQuestion.options[index],
+                          isSelected: _selectedOptionIndex == index,
+                          isSubmitted: _isSubmitted,
+                          isCorrect: currentQuestion.answer == index,
+                          onTap: () => _handleOptionTap(index),
+                        );
+                      }),
+
+                      // Result feedback section (animated after submit)
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 300),
+                        child: _isSubmitted
+                            ? Column(
+                                key: const ValueKey('results_feedback'),
+                                children: [
+                                  const SizedBox(height: AppSpacing.xs),
+
+                                  // Result banner (Correct / Wrong)
+                                  Container(
+                                    width: double.infinity,
+                                    margin: const EdgeInsets.only(
+                                      bottom: AppSpacing.lg,
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: AppSpacing.lg,
+                                      vertical: AppSpacing.md + 2,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: isCorrect
+                                          ? const Color(0xFF16A34A).withAlpha(isDark ? 40 : 20)
+                                          : const Color(0xFFDC2626).withAlpha(isDark ? 40 : 20),
+                                      borderRadius: BorderRadius.circular(AppRadius.card - 2),
+                                      border: Border.all(
+                                        color: isCorrect
+                                            ? const Color(0xFF16A34A)
+                                            : const Color(0xFFDC2626),
+                                        width: 1.2,
+                                      ),
+                                    ),
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Icon(
+                                          isCorrect
+                                              ? Icons.check_circle_rounded
+                                              : Icons.cancel_rounded,
+                                          color: isCorrect
+                                              ? const Color(0xFF16A34A)
+                                              : const Color(0xFFDC2626),
+                                          size: 24,
+                                        ),
+                                        const SizedBox(width: AppSpacing.md),
+                                        Expanded(
+                                          child: Text(
+                                            isCorrect
+                                                ? 'Correct! Great job.'
+                                                : 'Wrong! The correct answer is Option $correctOptionLetter: $correctOptionText',
+                                            style: TextStyle(
+                                              color: isCorrect
+                                                  ? const Color(0xFF16A34A)
+                                                  : const Color(0xFFDC2626),
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 14.5,
+                                              height: 1.35,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  // Explanation Card
+                                  if (currentQuestion.hasExplanation)
+                                    ExplanationCard(
+                                      title: 'Explanation',
+                                      content: currentQuestion.explanation!,
+                                      icon: Icons.lightbulb_rounded,
+                                      accentColor: theme.colorScheme.primary,
+                                    ),
+
+                                  // In Simple Words Card
+                                  if (currentQuestion.hasSimpleExplanation)
+                                    ExplanationCard(
+                                      title: 'In simple words',
+                                      content: currentQuestion.simpleExplanation!,
+                                      icon: Icons.chat_bubble_outline_rounded,
+                                      accentColor: const Color(0xFF0D9488),
+                                    ),
+
+                                  const SizedBox(height: AppSpacing.md),
+                                ],
+                              )
+                            : const SizedBox.shrink(),
+                      ),
                     ],
-                  ],
+                  ),
+                ),
+              ),
+
+              // Pinned Bottom Action Button Bar (Submit -> Next / Finish)
+              Container(
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.xl,
+                  AppSpacing.sm,
+                  AppSpacing.xl,
+                  AppSpacing.lg,
+                ),
+                decoration: BoxDecoration(
+                  color: theme.scaffoldBackgroundColor,
+                  border: Border(
+                    top: BorderSide(
+                      color: theme.colorScheme.outlineVariant.withAlpha(isDark ? 50 : 100),
+                    ),
+                  ),
+                ),
+                child: SafeArea(
+                  top: false,
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 250),
+                    transitionBuilder: (child, animation) {
+                      return FadeTransition(opacity: animation, child: child);
+                    },
+                    child: !_isSubmitted
+                        ? SizedBox(
+                            key: const ValueKey('btn_submit'),
+                            width: double.infinity,
+                            child: FilledButton(
+                              onPressed: _selectedOptionIndex == null
+                                  ? null
+                                  : _handleSubmit,
+                              style: FilledButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(vertical: 16),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(AppRadius.button),
+                                ),
+                              ),
+                              child: const Text('Submit'),
+                            ),
+                          )
+                        : SizedBox(
+                            key: const ValueKey('btn_next'),
+                            width: double.infinity,
+                            child: FilledButton.icon(
+                              onPressed: _handleNextOrFinish,
+                              icon: Icon(
+                                isLastQuestion
+                                    ? Icons.flag_rounded
+                                    : Icons.arrow_forward_rounded,
+                              ),
+                              label: Text(isLastQuestion ? 'Finish' : 'Next'),
+                              style: FilledButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(vertical: 16),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(AppRadius.button),
+                                ),
+                              ),
+                            ),
+                          ),
+                  ),
                 ),
               ),
             ],
