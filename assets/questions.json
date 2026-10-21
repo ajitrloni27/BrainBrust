@@ -1,0 +1,44 @@
+{
+  "topics": [
+    {
+      "id": "html",
+      "name": "HTML",
+      "questions": []
+    },
+    {
+      "id": "css",
+      "name": "CSS",
+      "questions": []
+    },
+    {
+      "id": "javascript",
+      "name": "JavaScript",
+      "questions": []
+    },
+    {
+      "id": "nodejs",
+      "name": "Node.js",
+      "questions": []
+    },
+    {
+      "id": "express",
+      "name": "Express",
+      "questions": []
+    },
+    {
+      "id": "git",
+      "name": "Git & GitHub",
+      "questions": []
+    },
+    {
+      "id": "backend",
+      "name": "Backend Concepts",
+      "questions": []
+    },
+    {
+      "id": "rag",
+      "name": "RAG",
+      "questions": []
+    }
+  ]
+}
