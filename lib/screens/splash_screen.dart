@@ -294,7 +294,7 @@ class _SplashScreenState extends State<SplashScreen>
                       ),
                       const SizedBox(height: 14),
 
-                      // 4. Subtitle: "Quick bursts of practice for your placements"
+                      // 4. Subtitle: "Quick bursts of practice for your tech skills"
                       FadeTransition(
                         opacity: _subtitleFade,
                         child: SlideTransition(
@@ -311,7 +311,7 @@ class _SplashScreenState extends State<SplashScreen>
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
-                              'Quick bursts of practice for your placements',
+                              'Quick bursts of practice for your tech skills',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 13.5,

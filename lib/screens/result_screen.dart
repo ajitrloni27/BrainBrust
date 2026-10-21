@@ -20,7 +20,7 @@ class ResultScreen extends StatelessWidget {
   String get scoreMessage {
     final pct = percentage;
     if (pct >= 90) {
-      return "Outstanding! You're completely placement-ready! 🚀";
+      return "Outstanding! You've completely mastered this! 🚀";
     } else if (pct >= 75) {
       return "Great work! Solid grasp of core concepts. Keep it up! 🌟";
     } else if (pct >= 50) {
