@@ -5,11 +5,13 @@ import '../theme/app_theme.dart';
 class TopicCard extends StatefulWidget {
   final Topic topic;
   final VoidCallback onTap;
+  final bool hasSavedProgress;
 
   const TopicCard({
     super.key,
     required this.topic,
     required this.onTap,
+    this.hasSavedProgress = false,
   });
 
   @override
@@ -42,8 +44,10 @@ class _TopicCardState extends State<TopicCard> {
           color: theme.cardTheme.color,
           borderRadius: BorderRadius.circular(AppRadius.card),
           border: Border.all(
-            color: theme.colorScheme.outlineVariant.withAlpha(isDark ? 50 : 120),
-            width: 1.2,
+            color: widget.hasSavedProgress
+                ? topic.primaryAccentColor.withAlpha(isDark ? 90 : 130)
+                : theme.colorScheme.outlineVariant.withAlpha(isDark ? 50 : 120),
+            width: widget.hasSavedProgress ? 1.5 : 1.2,
           ),
           boxShadow: [
             BoxShadow(
@@ -69,7 +73,7 @@ class _TopicCardState extends State<TopicCard> {
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppSpacing.lg,
-                vertical: AppSpacing.lg,
+                vertical: AppSpacing.md + 2,
               ),
               child: Row(
                 children: [
@@ -100,16 +104,58 @@ class _TopicCardState extends State<TopicCard> {
                   ),
                   const SizedBox(width: AppSpacing.md),
 
-                  // Topic name
+                  // Topic name + optional "In progress" badge
                   Expanded(
-                    child: Text(
-                      topic.name,
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: -0.2,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          topic.name,
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: -0.2,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        if (widget.hasSavedProgress) ...[
+                          const SizedBox(height: 4),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 7,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: topic.primaryAccentColor.withAlpha(isDark ? 45 : 20),
+                              borderRadius: BorderRadius.circular(6),
+                              border: Border.all(
+                                color: topic.primaryAccentColor.withAlpha(isDark ? 80 : 60),
+                                width: 0.8,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.history_rounded,
+                                  size: 11,
+                                  color: topic.primaryAccentColor,
+                                ),
+                                const SizedBox(width: 3),
+                                Text(
+                                  'In progress',
+                                  style: TextStyle(
+                                    fontSize: 10.5,
+                                    fontWeight: FontWeight.w700,
+                                    color: topic.primaryAccentColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
                   ),
 

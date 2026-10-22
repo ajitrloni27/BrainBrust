@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/topic.dart';
+import '../services/progress_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/topic_card.dart';
 import 'quiz_screen.dart';
@@ -24,15 +25,16 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   late Future<List<Topic>> _topicsFuture;
   late AnimationController _staggerController;
+  Map<String, int> _progressMap = {};
 
   @override
   void initState() {
     super.initState();
-    _topicsFuture = _loadTopics();
     _staggerController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 900),
     );
+    _topicsFuture = _loadTopicsAndProgress();
   }
 
   @override
@@ -41,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
-  Future<List<Topic>> _loadTopics() async {
+  Future<List<Topic>> _loadTopicsAndProgress() async {
     try {
       final jsonString = await rootBundle.loadString('assets/questions.json');
       final Map<String, dynamic> data = json.decode(jsonString);
@@ -50,7 +52,13 @@ class _HomeScreenState extends State<HomeScreen>
           .map((t) => Topic.fromJson(t as Map<String, dynamic>))
           .toList();
 
+      final topicIds = topics.map((t) => t.id).toList();
+      final progress = await ProgressService.getAllProgress(topicIds);
+
       if (mounted) {
+        setState(() {
+          _progressMap = progress;
+        });
         _staggerController.forward(from: 0.0);
       }
       return topics;
@@ -60,30 +68,122 @@ class _HomeScreenState extends State<HomeScreen>
     }
   }
 
-  void _refreshTopics() {
+  void _refresh() {
     setState(() {
-      _topicsFuture = _loadTopics();
+      _topicsFuture = _loadTopicsAndProgress();
     });
   }
 
-  void _handleTopicTap(BuildContext context, Topic topic) {
+  void _openQuiz(Topic topic, int initialIndex) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            QuizScreen(topic: topic, initialIndex: initialIndex),
+        transitionsBuilder:
+            (context, animation, secondaryAnimation, child) {
+          return FadeTransition(opacity: animation, child: child);
+        },
+        transitionDuration: const Duration(milliseconds: 300),
+      ),
+    ).then((_) {
+      // Refresh progress chips upon returning
+      _refresh();
+    });
+  }
+
+  Future<void> _handleTopicTap(BuildContext context, Topic topic) async {
     if (!topic.hasQuestions) {
       _showComingSoonDialog(context, topic);
-    } else {
-      Navigator.push(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              QuizScreen(topic: topic),
-          transitionsBuilder:
-              (context, animation, secondaryAnimation, child) {
-            return FadeTransition(opacity: animation, child: child);
-          },
-          transitionDuration: const Duration(milliseconds: 300),
+      return;
+    }
+
+    final total = topic.questions.length;
+    final rawSavedIndex = _progressMap[topic.id] ?? 0;
+
+    // Check if there is valid active progress (greater than 0 and less than total)
+    if (rawSavedIndex > 0 && rawSavedIndex < total) {
+      final savedQuestionNum = rawSavedIndex + 1;
+
+      // 3. Resume Prompt Dialog
+      final result = await showDialog<String>(
+        context: context,
+        barrierDismissible: true, // Dismissing by tapping outside stays on topics screen
+        builder: (ctx) => AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppRadius.card),
+          ),
+          icon: Container(
+            width: 52,
+            height: 52,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: topic.gradientColors,
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.history_rounded,
+              color: Colors.white,
+              size: 28,
+            ),
+          ),
+          title: const Text(
+            'Continue where you left off?',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
+          content: Text(
+            'You stopped at question $savedQuestionNum of $total.',
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 14.5, height: 1.4),
+          ),
+          actionsAlignment: MainAxisAlignment.center,
+          actionsOverflowButtonSpacing: 8,
+          actions: [
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton(
+                onPressed: () => Navigator.of(ctx).pop('continue'),
+                style: FilledButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppRadius.button),
+                  ),
+                ),
+                child: Text('Continue from Question $savedQuestionNum'),
+              ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                onPressed: () => Navigator.of(ctx).pop('restart'),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppRadius.button),
+                  ),
+                ),
+                child: const Text('Start from beginning'),
+              ),
+            ),
+          ],
         ),
-      ).then((_) {
-        _refreshTopics();
-      });
+      );
+
+      // Handle user's selection
+      if (result == 'continue') {
+        _openQuiz(topic, rawSavedIndex);
+      } else if (result == 'restart') {
+        await ProgressService.saveProgress(topic.id, 0);
+        _openQuiz(topic, 0);
+      }
+      // If result is null (dismissed outside), do nothing and stay on home screen
+    } else {
+      // No saved progress: open directly at question 1 (index 0)
+      _openQuiz(topic, 0);
     }
   }
 
@@ -178,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                     const SizedBox(height: AppSpacing.lg),
                     FilledButton.icon(
-                      onPressed: _refreshTopics,
+                      onPressed: _refresh,
                       icon: const Icon(Icons.refresh_rounded),
                       label: const Text('Try Again'),
                     ),
@@ -229,7 +329,6 @@ class _HomeScreenState extends State<HomeScreen>
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Top action bar inside header
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -271,7 +370,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       color: Colors.white,
                                       size: 20,
                                     ),
-                                    onPressed: _refreshTopics,
+                                    onPressed: _refresh,
                                   ),
                                   IconButton(
                                     tooltip: 'Toggle Theme',
@@ -289,8 +388,6 @@ class _HomeScreenState extends State<HomeScreen>
                             ],
                           ),
                           const SizedBox(height: AppSpacing.md),
-
-                          // Header Title & Subtitle
                           const Text(
                             'BrainBurst',
                             style: TextStyle(
@@ -317,7 +414,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ),
 
-              // Topics Section Title
+              // Section Header
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(
@@ -372,10 +469,16 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {
+                            final topic = topics[index];
+                            final savedIndex = _progressMap[topic.id] ?? 0;
+                            final hasSavedProgress = savedIndex > 0 &&
+                                savedIndex < topic.questions.length;
+
                             return _buildStaggeredItem(
                               index,
-                              topics[index],
+                              topic,
                               topics.length,
+                              hasSavedProgress,
                             );
                           },
                           childCount: topics.length,
@@ -385,14 +488,20 @@ class _HomeScreenState extends State<HomeScreen>
                       return SliverList(
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {
+                            final topic = topics[index];
+                            final savedIndex = _progressMap[topic.id] ?? 0;
+                            final hasSavedProgress = savedIndex > 0 &&
+                                savedIndex < topic.questions.length;
+
                             return Padding(
                               padding: const EdgeInsets.only(
                                 bottom: AppSpacing.md,
                               ),
                               child: _buildStaggeredItem(
                                 index,
-                                topics[index],
+                                topic,
                                 topics.length,
+                                hasSavedProgress,
                               ),
                             );
                           },
@@ -410,7 +519,12 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Widget _buildStaggeredItem(int index, Topic topic, int totalCount) {
+  Widget _buildStaggeredItem(
+    int index,
+    Topic topic,
+    int totalCount,
+    bool hasSavedProgress,
+  ) {
     final double start = (index * 0.08).clamp(0.0, 0.7);
     final double end = (start + 0.35).clamp(0.0, 1.0);
 
@@ -432,6 +546,7 @@ class _HomeScreenState extends State<HomeScreen>
       },
       child: TopicCard(
         topic: topic,
+        hasSavedProgress: hasSavedProgress,
         onTap: () => _handleTopicTap(context, topic),
       ),
     );

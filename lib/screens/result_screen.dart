@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/topic.dart';
+import '../services/progress_service.dart';
 import '../theme/app_theme.dart';
 import 'quiz_screen.dart';
 
@@ -157,19 +158,20 @@ class ResultScreen extends StatelessWidget {
 
               const Spacer(),
 
-              // Action Buttons
-              // Practice Again (Reshuffles questions)
+              // Practice Again (Restarts from Question 1 in fixed order)
               SizedBox(
                 width: double.infinity,
                 child: FilledButton.icon(
-                  onPressed: () {
+                  onPressed: () async {
+                    await ProgressService.saveProgress(topic.id, 0);
+                    if (!context.mounted) return;
                     Navigator.pushReplacement(
                       context,
                       PageRouteBuilder(
                         pageBuilder: (context, animation, secondaryAnimation) =>
                             QuizScreen(
                           topic: topic,
-                          shuffleQuestions: true,
+                          initialIndex: 0,
                         ),
                         transitionsBuilder:
                             (context, animation, secondaryAnimation, child) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/question.dart';
 import '../models/topic.dart';
+import '../services/progress_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/code_box.dart';
 import '../widgets/explanation_card.dart';
@@ -10,12 +11,12 @@ import 'result_screen.dart';
 
 class QuizScreen extends StatefulWidget {
   final Topic topic;
-  final bool shuffleQuestions;
+  final int initialIndex;
 
   const QuizScreen({
     super.key,
     required this.topic,
-    this.shuffleQuestions = false,
+    this.initialIndex = 0,
   });
 
   @override
@@ -24,7 +25,7 @@ class QuizScreen extends StatefulWidget {
 
 class _QuizScreenState extends State<QuizScreen> {
   late List<Question> _questions;
-  int _currentIndex = 0;
+  late int _currentIndex;
   int? _selectedOptionIndex;
   bool _isSubmitted = false;
   final ScrollController _scrollController = ScrollController();
@@ -32,9 +33,16 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   void initState() {
     super.initState();
+    // 1. Fixed question order (no shuffling)
     _questions = List<Question>.from(widget.topic.questions);
-    if (widget.shuffleQuestions) {
-      _questions.shuffle();
+
+    // Clamp initialIndex safely in case questions count changed
+    if (_questions.isNotEmpty) {
+      _currentIndex = widget.initialIndex.clamp(0, _questions.length - 1);
+      // 2. Save progress as soon as question is displayed
+      ProgressService.saveProgress(widget.topic.id, _currentIndex);
+    } else {
+      _currentIndex = 0;
     }
   }
 
@@ -81,10 +89,16 @@ class _QuizScreenState extends State<QuizScreen> {
         _isSubmitted = false;
       });
 
+      // Save progress immediately for the new question
+      ProgressService.saveProgress(widget.topic.id, _currentIndex);
+
       if (_scrollController.hasClients) {
         _scrollController.jumpTo(0.0);
       }
     } else {
+      // Clear progress when the topic is finished
+      ProgressService.clearProgress(widget.topic.id);
+
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
@@ -108,20 +122,17 @@ class _QuizScreenState extends State<QuizScreen> {
           borderRadius: BorderRadius.circular(AppRadius.card),
         ),
         title: const Text('Leave Quiz?'),
-        content: const Text(
-          'Are you sure you want to exit? Your progress for this session will be lost.',
+        content: Text(
+          'Your progress is saved at Question ${_currentIndex + 1}. You can continue where you left off anytime.',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
-            child: const Text('Cancel'),
+            child: const Text('Stay'),
           ),
           FilledButton(
             onPressed: () => Navigator.of(ctx).pop(true),
-            style: FilledButton.styleFrom(
-              backgroundColor: Colors.red.shade600,
-            ),
-            child: const Text('Leave'),
+            child: const Text('Exit'),
           ),
         ],
       ),
@@ -284,7 +295,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       AppSpacing.xl,
                     ),
                     children: [
-                      // Question text in card with generous padding
+                      // Question Card
                       Container(
                         width: double.infinity,
                         padding: const EdgeInsets.all(AppSpacing.xl),
@@ -316,13 +327,13 @@ class _QuizScreenState extends State<QuizScreen> {
                         ),
                       ),
 
-                      // Code snippet box (if present)
+                      // Code Box
                       if (currentQuestion.hasCode)
                         CodeBox(code: currentQuestion.code!),
                       if (!currentQuestion.hasCode)
                         const SizedBox(height: AppSpacing.lg),
 
-                      // Options List (User can change selection freely before submitting)
+                      // Options
                       ...List.generate(currentQuestion.options.length, (index) {
                         return OptionTile(
                           index: index,
@@ -334,7 +345,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         );
                       }),
 
-                      // Result feedback section (animated after submit)
+                      // Result Feedback Section
                       AnimatedSwitcher(
                         duration: const Duration(milliseconds: 300),
                         child: _isSubmitted
@@ -342,8 +353,6 @@ class _QuizScreenState extends State<QuizScreen> {
                                 key: const ValueKey('results_feedback'),
                                 children: [
                                   const SizedBox(height: AppSpacing.xs),
-
-                                  // Result banner (Correct / Wrong)
                                   Container(
                                     width: double.infinity,
                                     margin: const EdgeInsets.only(
@@ -397,7 +406,6 @@ class _QuizScreenState extends State<QuizScreen> {
                                     ),
                                   ),
 
-                                  // Explanation Card
                                   if (currentQuestion.hasExplanation)
                                     ExplanationCard(
                                       title: 'Explanation',
@@ -406,7 +414,6 @@ class _QuizScreenState extends State<QuizScreen> {
                                       accentColor: theme.colorScheme.primary,
                                     ),
 
-                                  // In Simple Words Card
                                   if (currentQuestion.hasSimpleExplanation)
                                     ExplanationCard(
                                       title: 'In simple words',
@@ -425,7 +432,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 ),
               ),
 
-              // Pinned Bottom Action Button Bar (Submit -> Next / Finish)
+              // Pinned Bottom Button Bar (Submit -> Next / Finish)
               Container(
                 padding: const EdgeInsets.fromLTRB(
                   AppSpacing.xl,
