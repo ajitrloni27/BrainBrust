@@ -3,12 +3,2939 @@
     {
       "id": "html",
       "name": "HTML",
-      "questions": []
+      "questions": [
+        {
+          "question": "What does HTML stand for?",
+          "code": null,
+          "options": [
+            "HyperText Markup Language",
+            "HighText Machine Language",
+            "Hyperlink Transfer Main Language",
+            "Home Tool Markup Language"
+          ],
+          "answer": 0,
+          "explanation": "HTML is the markup language used to structure web content.",
+          "simpleExplanation": "Remember: HTML is the markup language used to structure web content."
+        },
+        {
+          "question": "Which statement best describes HTML?",
+          "code": null,
+          "options": [
+            "A database language",
+            "A markup language for structuring content",
+            "A styling language",
+            "A general-purpose programming language"
+          ],
+          "answer": 1,
+          "explanation": "HTML defines structure; CSS handles presentation and JavaScript adds behavior.",
+          "simpleExplanation": "Remember: HTML defines structure; CSS handles presentation and JavaScript adds behavior."
+        },
+        {
+          "question": "Which declaration is used for a modern HTML document?",
+          "code": null,
+          "options": [
+            "<doctype html5>",
+            "<!DOCTYPE html>",
+            "<html version='5'>",
+            "<!HTML5>"
+          ],
+          "answer": 1,
+          "explanation": "The short doctype declaration tells the browser to use standards mode.",
+          "simpleExplanation": "Remember: The short doctype declaration tells the browser to use standards mode."
+        },
+        {
+          "question": "Which element contains the visible page content?",
+          "code": null,
+          "options": [
+            "<head>",
+            "<meta>",
+            "<body>",
+            "<title>"
+          ],
+          "answer": 2,
+          "explanation": "The body contains the page's rendered content.",
+          "simpleExplanation": "Remember: The body contains the page's rendered content."
+        },
+        {
+          "question": "Which element contains metadata and links to stylesheets?",
+          "code": null,
+          "options": [
+            "<head>",
+            "<footer>",
+            "<main>",
+            "<section>"
+          ],
+          "answer": 0,
+          "explanation": "The head contains information about the document, such as title, metadata, and stylesheet links.",
+          "simpleExplanation": "Remember: The head contains information about the document, such as title, metadata, and stylesheet links."
+        },
+        {
+          "question": "What is an HTML element?",
+          "code": null,
+          "options": [
+            "Only the opening tag",
+            "The opening tag, content, and closing tag where applicable",
+            "Only the text between tags",
+            "A CSS selector"
+          ],
+          "answer": 1,
+          "explanation": "For example, <p>Hello</p> is a paragraph element.",
+          "simpleExplanation": "Remember: For example, <p>Hello</p> is a paragraph element."
+        },
+        {
+          "question": "Which element sets the document title shown in the browser tab?",
+          "code": null,
+          "options": [
+            "<header>",
+            "<h1>",
+            "<title>",
+            "<caption>"
+          ],
+          "answer": 2,
+          "explanation": "The title element belongs inside head and names the document.",
+          "simpleExplanation": "Remember: The title element belongs inside head and names the document."
+        },
+        {
+          "question": "Which attribute identifies the language of the document?",
+          "code": null,
+          "options": [
+            "charset",
+            "lang",
+            "locale",
+            "language-code"
+          ],
+          "answer": 1,
+          "explanation": "For example, <html lang=\"en\"> declares English as the page language.",
+          "simpleExplanation": "Remember: For example, <html lang=\"en\"> declares English as the page language."
+        },
+        {
+          "question": "Which is a correct minimal document structure?",
+          "code": null,
+          "options": [
+            "<body><html><head></head></html></body>",
+            "<!DOCTYPE html><html><head></head><body></body></html>",
+            "<head><body></body></head>",
+            "<html><body><head></head></body></html>"
+          ],
+          "answer": 1,
+          "explanation": "A standard document has doctype, html, head, and body in that order.",
+          "simpleExplanation": "Remember: A standard document has doctype, html, head, and body in that order."
+        },
+        {
+          "question": "What is the purpose of comments in HTML?",
+          "code": null,
+          "options": [
+            "To execute JavaScript",
+            "To add notes not rendered as page content",
+            "To create hidden form fields",
+            "To style elements"
+          ],
+          "answer": 1,
+          "explanation": "HTML comments use <!-- comment --> and are not displayed as normal page content.",
+          "simpleExplanation": "Remember: HTML comments use <!-- comment --> and are not displayed as normal page content."
+        },
+        {
+          "question": "Which is the correct way to write an attribute value with spaces?",
+          "code": null,
+          "options": [
+            "<p class=main text>",
+            "<p class=\"main text\">",
+            "<p class:main text>",
+            "<p class(main text)>"
+          ],
+          "answer": 1,
+          "explanation": "Quotes safely group an attribute value that contains spaces.",
+          "simpleExplanation": "Remember: Quotes safely group an attribute value that contains spaces."
+        },
+        {
+          "question": "Which element represents the most important heading level?",
+          "code": null,
+          "options": [
+            "<h6>",
+            "<head>",
+            "<h1>",
+            "<heading>"
+          ],
+          "answer": 2,
+          "explanation": "HTML provides heading levels h1 through h6.",
+          "simpleExplanation": "Remember: HTML provides heading levels h1 through h6."
+        },
+        {
+          "question": "Which element is a void element?",
+          "code": null,
+          "options": [
+            "<div>",
+            "<p>",
+            "<br>",
+            "<section>"
+          ],
+          "answer": 2,
+          "explanation": "Void elements do not have closing tags; examples include br, img, input, and hr.",
+          "simpleExplanation": "Remember: Void elements do not have closing tags; examples include br, img, input, and hr."
+        },
+        {
+          "question": "Which entity displays a less-than sign as text?",
+          "code": null,
+          "options": [
+            "&gt;",
+            "&amp;",
+            "&lt;",
+            "&less-than;"
+          ],
+          "answer": 2,
+          "explanation": "&lt; represents < and &gt; represents >.",
+          "simpleExplanation": "Remember: &lt; represents < and &gt; represents >."
+        },
+        {
+          "question": "Which element is commonly used as a generic inline container?",
+          "code": null,
+          "options": [
+            "<div>",
+            "<span>",
+            "<main>",
+            "<article>"
+          ],
+          "answer": 1,
+          "explanation": "Span has no inherent semantic meaning and is commonly used inline.",
+          "simpleExplanation": "Remember: Span has no inherent semantic meaning and is commonly used inline."
+        },
+        {
+          "question": "Which element is a generic block-level container with no inherent semantic meaning?",
+          "code": null,
+          "options": [
+            "<div>",
+            "<em>",
+            "<strong>",
+            "<label>"
+          ],
+          "answer": 0,
+          "explanation": "Div is a generic container; modern layout is usually controlled with CSS.",
+          "simpleExplanation": "Remember: Div is a generic container; modern layout is usually controlled with CSS."
+        },
+        {
+          "question": "What does the <hr> element traditionally represent?",
+          "code": null,
+          "options": [
+            "A horizontal rule only, with no meaning",
+            "A thematic break between paragraph-level sections",
+            "A page footer",
+            "A heading"
+          ],
+          "answer": 1,
+          "explanation": "HR represents a thematic break; its appearance can be styled with CSS.",
+          "simpleExplanation": "Remember: HR represents a thematic break; its appearance can be styled with CSS."
+        },
+        {
+          "question": "Which statement about HTML tag names is generally correct?",
+          "code": null,
+          "options": [
+            "They must always be uppercase",
+            "They are case-sensitive",
+            "They are conventionally written lowercase",
+            "They must contain underscores"
+          ],
+          "answer": 2,
+          "explanation": "HTML tag names are case-insensitive, and lowercase is the standard convention.",
+          "simpleExplanation": "Remember: HTML tag names are case-insensitive, and lowercase is the standard convention."
+        },
+        {
+          "question": "What does the <em> element convey?",
+          "code": null,
+          "options": [
+            "Only a larger font",
+            "Stress emphasis",
+            "A hyperlink",
+            "A table row"
+          ],
+          "answer": 1,
+          "explanation": "Em conveys stress emphasis, often rendered in italics by default.",
+          "simpleExplanation": "Remember: Em conveys stress emphasis, often rendered in italics by default."
+        },
+        {
+          "question": "What is the semantic difference between <strong> and <b>?",
+          "code": null,
+          "options": [
+            "Strong marks importance; b draws attention without adding the same importance meaning",
+            "B is semantic and strong is not",
+            "They are identical in every respect",
+            "Strong creates a heading"
+          ],
+          "answer": 0,
+          "explanation": "Their default appearance can be similar, but their meaning differs.",
+          "simpleExplanation": "Remember: Their default appearance can be similar, but their meaning differs."
+        },
+        {
+          "question": "Which attribute gives an anchor's destination?",
+          "code": null,
+          "options": [
+            "src",
+            "href",
+            "target",
+            "action"
+          ],
+          "answer": 1,
+          "explanation": "The href attribute specifies the linked URL or destination.",
+          "simpleExplanation": "Remember: The href attribute specifies the linked URL or destination."
+        },
+        {
+          "question": "Which is a relative URL?",
+          "code": null,
+          "options": [
+            "https://example.com/about.html",
+            "mailto:help@example.com",
+            "about.html",
+            "https://example.com"
+          ],
+          "answer": 2,
+          "explanation": "A relative URL is resolved from the current document or base URL.",
+          "simpleExplanation": "Remember: A relative URL is resolved from the current document or base URL."
+        },
+        {
+          "question": "Which scheme can open an email composition window?",
+          "code": null,
+          "options": [
+            "email:",
+            "mailto:",
+            "sendto:",
+            "message:"
+          ],
+          "answer": 1,
+          "explanation": "A mailto link can open the user's configured email app.",
+          "simpleExplanation": "Remember: A mailto link can open the user's configured email app."
+        },
+        {
+          "question": "Which attribute provides alternative text for an image?",
+          "code": null,
+          "options": [
+            "title",
+            "caption",
+            "alt",
+            "description"
+          ],
+          "answer": 2,
+          "explanation": "Alt text communicates the image's relevant information when it cannot be seen.",
+          "simpleExplanation": "Remember: Alt text communicates the image's relevant information when it cannot be seen."
+        },
+        {
+          "question": "Which attribute specifies the image file?",
+          "code": null,
+          "options": [
+            "href",
+            "src",
+            "action",
+            "poster"
+          ],
+          "answer": 1,
+          "explanation": "Src points to the image resource.",
+          "simpleExplanation": "Remember: Src points to the image resource."
+        },
+        {
+          "question": "What is the purpose of loading='lazy' on an offscreen image?",
+          "code": null,
+          "options": [
+            "Compresses the image",
+            "Delays loading until it is near the viewport",
+            "Makes it invisible",
+            "Converts it to SVG"
+          ],
+          "answer": 1,
+          "explanation": "Lazy loading can reduce initial loading work for offscreen images.",
+          "simpleExplanation": "Remember: Lazy loading can reduce initial loading work for offscreen images."
+        },
+        {
+          "question": "Which elements are paired for a semantic figure and caption?",
+          "code": null,
+          "options": [
+            "<picture> and <title>",
+            "<figure> and <figcaption>",
+            "<img> and <caption>",
+            "<media> and <label>"
+          ],
+          "answer": 1,
+          "explanation": "Figure groups self-contained content and figcaption provides its caption.",
+          "simpleExplanation": "Remember: Figure groups self-contained content and figcaption provides its caption."
+        },
+        {
+          "question": "What is the purpose of the <picture> element?",
+          "code": null,
+          "options": [
+            "To take a photo",
+            "To offer alternate image sources with an img fallback",
+            "To draw with JavaScript",
+            "To add a caption only"
+          ],
+          "answer": 1,
+          "explanation": "Picture and source can support responsive images or different image formats.",
+          "simpleExplanation": "Remember: Picture and source can support responsive images or different image formats."
+        },
+        {
+          "question": "Which attribute opens a link in a new browsing context?",
+          "code": null,
+          "options": [
+            "rel='_blank'",
+            "target='_blank'",
+            "href='_blank'",
+            "newtab='true'"
+          ],
+          "answer": 1,
+          "explanation": "Target blank requests a new tab or window depending on browser behavior.",
+          "simpleExplanation": "Remember: Target blank requests a new tab or window depending on browser behavior."
+        },
+        {
+          "question": "Which rel value is commonly used with target='_blank' to prevent opener access?",
+          "code": null,
+          "options": [
+            "noopener",
+            "stylesheet",
+            "canonical",
+            "preload"
+          ],
+          "answer": 0,
+          "explanation": "Rel noopener prevents the opened page from accessing the opener window; noreferrer can also suppress referrer information.",
+          "simpleExplanation": "Remember: Rel noopener prevents the opened page from accessing the opener window; noreferrer can also suppress referrer information."
+        },
+        {
+          "question": "Which element creates an ordered list?",
+          "code": null,
+          "options": [
+            "<ul>",
+            "<ol>",
+            "<li>",
+            "<dl>"
+          ],
+          "answer": 1,
+          "explanation": "Ol creates a list whose order is meaningful or numbered.",
+          "simpleExplanation": "Remember: Ol creates a list whose order is meaningful or numbered."
+        },
+        {
+          "question": "Which element creates an unordered list?",
+          "code": null,
+          "options": [
+            "<ul>",
+            "<ol>",
+            "<dt>",
+            "<dd>"
+          ],
+          "answer": 0,
+          "explanation": "Ul normally displays a bulleted list.",
+          "simpleExplanation": "Remember: Ul normally displays a bulleted list."
+        },
+        {
+          "question": "Which element represents an item in an ordered or unordered list?",
+          "code": null,
+          "options": [
+            "<item>",
+            "<li>",
+            "<list>",
+            "<option>"
+          ],
+          "answer": 1,
+          "explanation": "Li is a list item inside ul or ol.",
+          "simpleExplanation": "Remember: Li is a list item inside ul or ol."
+        },
+        {
+          "question": "In a description list, which element marks the term?",
+          "code": null,
+          "options": [
+            "<dd>",
+            "<dt>",
+            "<dl-item>",
+            "<th>"
+          ],
+          "answer": 1,
+          "explanation": "Dt is the term; dd contains its description.",
+          "simpleExplanation": "Remember: Dt is the term; dd contains its description."
+        },
+        {
+          "question": "Which element creates a table row?",
+          "code": null,
+          "options": [
+            "<td>",
+            "<th>",
+            "<tr>",
+            "<thead>"
+          ],
+          "answer": 2,
+          "explanation": "Tr groups table cells into a row.",
+          "simpleExplanation": "Remember: Tr groups table cells into a row."
+        },
+        {
+          "question": "Which element is intended for a table header cell?",
+          "code": null,
+          "options": [
+            "<td>",
+            "<th>",
+            "<caption>",
+            "<col>"
+          ],
+          "answer": 1,
+          "explanation": "Th identifies a header cell and supports accessible table relationships.",
+          "simpleExplanation": "Remember: Th identifies a header cell and supports accessible table relationships."
+        },
+        {
+          "question": "Which element provides a table caption?",
+          "code": null,
+          "options": [
+            "<summary>",
+            "<caption>",
+            "<legend>",
+            "<figcaption>"
+          ],
+          "answer": 1,
+          "explanation": "Caption gives a table its title or description.",
+          "simpleExplanation": "Remember: Caption gives a table its title or description."
+        },
+        {
+          "question": "What is the purpose of colspan on a table cell?",
+          "code": null,
+          "options": [
+            "Merge cells across columns",
+            "Merge cells across rows",
+            "Hide a column",
+            "Add a table caption"
+          ],
+          "answer": 0,
+          "explanation": "Colspan makes a cell span multiple columns.",
+          "simpleExplanation": "Remember: Colspan makes a cell span multiple columns."
+        },
+        {
+          "question": "What is the purpose of rowspan?",
+          "code": null,
+          "options": [
+            "Set row height",
+            "Make a cell span multiple rows",
+            "Add a header",
+            "Repeat a row"
+          ],
+          "answer": 1,
+          "explanation": "Rowspan makes a cell occupy multiple rows.",
+          "simpleExplanation": "Remember: Rowspan makes a cell occupy multiple rows."
+        },
+        {
+          "question": "Why should tables generally not be used for page layout?",
+          "code": null,
+          "options": [
+            "Tables cannot contain text",
+            "They are meant for tabular data and can make layout less flexible and accessible",
+            "Browsers cannot style tables",
+            "Tables are obsolete"
+          ],
+          "answer": 1,
+          "explanation": "Use CSS layout tools for page layout and tables for genuinely tabular data.",
+          "simpleExplanation": "Remember: Use CSS layout tools for page layout and tables for genuinely tabular data."
+        },
+        {
+          "question": "Which element is intended for the main unique content of a page?",
+          "code": null,
+          "options": [
+            "<main>",
+            "<aside>",
+            "<nav>",
+            "<summary>"
+          ],
+          "answer": 0,
+          "explanation": "Main identifies the dominant content; normally there should not be multiple visible main elements.",
+          "simpleExplanation": "Remember: Main identifies the dominant content; normally there should not be multiple visible main elements."
+        },
+        {
+          "question": "Which element groups major navigation links?",
+          "code": null,
+          "options": [
+            "<nav>",
+            "<menuitem>",
+            "<links>",
+            "<route>"
+          ],
+          "answer": 0,
+          "explanation": "Nav identifies a navigation section.",
+          "simpleExplanation": "Remember: Nav identifies a navigation section."
+        },
+        {
+          "question": "Which element is appropriate for a self-contained blog post?",
+          "code": null,
+          "options": [
+            "<div>",
+            "<article>",
+            "<span>",
+            "<label>"
+          ],
+          "answer": 1,
+          "explanation": "Article is intended for independently reusable or distributable content.",
+          "simpleExplanation": "Remember: Article is intended for independently reusable or distributable content."
+        },
+        {
+          "question": "Which element groups thematically related content, often with a heading?",
+          "code": null,
+          "options": [
+            "<section>",
+            "<br>",
+            "<input>",
+            "<title>"
+          ],
+          "answer": 0,
+          "explanation": "Section groups related content; use a heading when appropriate.",
+          "simpleExplanation": "Remember: Section groups related content; use a heading when appropriate."
+        },
+        {
+          "question": "Which element is suitable for tangentially related content?",
+          "code": null,
+          "options": [
+            "<aside>",
+            "<main>",
+            "<strong>",
+            "<tbody>"
+          ],
+          "answer": 0,
+          "explanation": "Aside is commonly used for sidebars or related supplementary content.",
+          "simpleExplanation": "Remember: Aside is commonly used for sidebars or related supplementary content."
+        },
+        {
+          "question": "Which element commonly represents introductory or navigational content for a page or section?",
+          "code": null,
+          "options": [
+            "<header>",
+            "<head>",
+            "<title>",
+            "<meta>"
+          ],
+          "answer": 0,
+          "explanation": "Header is visible structural content, unlike head which holds document metadata.",
+          "simpleExplanation": "Remember: Header is visible structural content, unlike head which holds document metadata."
+        },
+        {
+          "question": "Which element commonly contains closing information or footer links?",
+          "code": null,
+          "options": [
+            "<bottom>",
+            "<footer>",
+            "<end>",
+            "<close>"
+          ],
+          "answer": 1,
+          "explanation": "Footer can contain author, copyright, or related links.",
+          "simpleExplanation": "Remember: Footer can contain author, copyright, or related links."
+        },
+        {
+          "question": "What is a benefit of semantic HTML?",
+          "code": null,
+          "options": [
+            "It automatically replaces CSS",
+            "It communicates structure and meaning to browsers and assistive technologies",
+            "It guarantees top search ranking",
+            "It eliminates JavaScript"
+          ],
+          "answer": 1,
+          "explanation": "Semantics improve the machine-readable structure of a page.",
+          "simpleExplanation": "Remember: Semantics improve the machine-readable structure of a page."
+        },
+        {
+          "question": "Should every group of content be a section element?",
+          "code": null,
+          "options": [
+            "Yes, always",
+            "No; use section for a meaningful thematic grouping",
+            "Only if it is blue",
+            "Only inside a table"
+          ],
+          "answer": 1,
+          "explanation": "Use generic containers when no semantic grouping is needed.",
+          "simpleExplanation": "Remember: Use generic containers when no semantic grouping is needed."
+        },
+        {
+          "question": "What is the difference between <head> and <header>?",
+          "code": null,
+          "options": [
+            "They mean the same thing",
+            "Head holds document metadata; header is visible introductory content",
+            "Header holds metadata; head is visible",
+            "Head is a table element"
+          ],
+          "answer": 1,
+          "explanation": "The names are similar but their roles are very different.",
+          "simpleExplanation": "Remember: The names are similar but their roles are very different."
+        },
+        {
+          "question": "Which element creates a form?",
+          "code": null,
+          "options": [
+            "<input>",
+            "<form>",
+            "<fieldset>",
+            "<submit>"
+          ],
+          "answer": 1,
+          "explanation": "Form groups controls that can submit data.",
+          "simpleExplanation": "Remember: Form groups controls that can submit data."
+        },
+        {
+          "question": "Which attribute names a submitted form field?",
+          "code": null,
+          "options": [
+            "id",
+            "class",
+            "name",
+            "style"
+          ],
+          "answer": 2,
+          "explanation": "The name is typically used as the key in submitted form data.",
+          "simpleExplanation": "Remember: The name is typically used as the key in submitted form data."
+        },
+        {
+          "question": "What connects a label to a form control?",
+          "code": null,
+          "options": [
+            "label class equals input class",
+            "label for matches control id",
+            "label name equals form name",
+            "input title equals label"
+          ],
+          "answer": 1,
+          "explanation": "Matching for and id improves usability and accessible naming.",
+          "simpleExplanation": "Remember: Matching for and id improves usability and accessible naming."
+        },
+        {
+          "question": "Which input type supports built-in email-format checking?",
+          "code": null,
+          "options": [
+            "type=\"mail\"",
+            "type=\"email\"",
+            "type=\"text-email\"",
+            "type=\"address\""
+          ],
+          "answer": 1,
+          "explanation": "Email input provides browser-level format validation, not proof that the address exists.",
+          "simpleExplanation": "Remember: Email input provides browser-level format validation, not proof that the address exists."
+        },
+        {
+          "question": "Which control allows multiple independent selections?",
+          "code": null,
+          "options": [
+            "Radio buttons in one group",
+            "Checkboxes",
+            "A single select without multiple",
+            "Submit button"
+          ],
+          "answer": 1,
+          "explanation": "Checkboxes allow zero, one, or several options to be selected.",
+          "simpleExplanation": "Remember: Checkboxes allow zero, one, or several options to be selected."
+        },
+        {
+          "question": "Which control is generally used when exactly one option should be chosen from a group?",
+          "code": null,
+          "options": [
+            "Checkboxes",
+            "Radio buttons sharing the same name",
+            "Textareas",
+            "File inputs"
+          ],
+          "answer": 1,
+          "explanation": "Radio buttons with the same name form a single-choice group.",
+          "simpleExplanation": "Remember: Radio buttons with the same name form a single-choice group."
+        },
+        {
+          "question": "Which element creates a multi-line text input?",
+          "code": null,
+          "options": [
+            "<input type='multiline'>",
+            "<textarea>",
+            "<text>",
+            "<paragraph-input>"
+          ],
+          "answer": 1,
+          "explanation": "Textarea accepts multiple lines of text.",
+          "simpleExplanation": "Remember: Textarea accepts multiple lines of text."
+        },
+        {
+          "question": "Which pair creates a native dropdown?",
+          "code": null,
+          "options": [
+            "<select> and <option>",
+            "<list> and <item>",
+            "<input> and <dropdown>",
+            "<menu> and <choice>"
+          ],
+          "answer": 0,
+          "explanation": "Select contains option elements.",
+          "simpleExplanation": "Remember: Select contains option elements."
+        },
+        {
+          "question": "Which attribute makes a field mandatory in browser validation?",
+          "code": null,
+          "options": [
+            "validate",
+            "required",
+            "mustfill",
+            "mandatory"
+          ],
+          "answer": 1,
+          "explanation": "Required activates built-in constraint validation for supported controls.",
+          "simpleExplanation": "Remember: Required activates built-in constraint validation for supported controls."
+        },
+        {
+          "question": "Which form method usually places submitted fields in the URL query string?",
+          "code": null,
+          "options": [
+            "POST",
+            "GET",
+            "PATCH",
+            "TRACE"
+          ],
+          "answer": 1,
+          "explanation": "GET is designed for retrieval and commonly places form parameters in the URL.",
+          "simpleExplanation": "Remember: GET is designed for retrieval and commonly places form parameters in the URL."
+        },
+        {
+          "question": "Which encoding is required for a typical HTML form file upload?",
+          "code": null,
+          "options": [
+            "application/json",
+            "text/plain",
+            "multipart/form-data",
+            "application/xml"
+          ],
+          "answer": 2,
+          "explanation": "Multipart form data allows files and fields to be sent together.",
+          "simpleExplanation": "Remember: Multipart form data allows files and fields to be sent together."
+        },
+        {
+          "question": "What does a hidden input guarantee?",
+          "code": null,
+          "options": [
+            "That its value is secret",
+            "That its value is encrypted",
+            "Only that the control is not displayed as a normal visible field",
+            "That users cannot change its value"
+          ],
+          "answer": 2,
+          "explanation": "Hidden inputs can be inspected or changed; never trust them for security.",
+          "simpleExplanation": "Remember: Hidden inputs can be inspected or changed; never trust them for security."
+        },
+        {
+          "question": "What is the purpose of fieldset and legend?",
+          "code": null,
+          "options": [
+            "Upload files",
+            "Group related controls and label the group",
+            "Style a heading",
+            "Create a dropdown"
+          ],
+          "answer": 1,
+          "explanation": "Fieldset groups related form controls; legend supplies the group caption.",
+          "simpleExplanation": "Remember: Fieldset groups related form controls; legend supplies the group caption."
+        },
+        {
+          "question": "What is the difference between disabled and readonly controls?",
+          "code": null,
+          "options": [
+            "They are always identical",
+            "Disabled controls are generally not submitted; readonly controls can be submitted where supported",
+            "Readonly controls are hidden",
+            "Disabled controls always submit"
+          ],
+          "answer": 1,
+          "explanation": "Disabled controls are not focusable and usually omitted from submission; readonly values can still be submitted.",
+          "simpleExplanation": "Remember: Disabled controls are not focusable and usually omitted from submission; readonly values can still be submitted."
+        },
+        {
+          "question": "What does the button type='submit' do inside a form?",
+          "code": null,
+          "options": [
+            "Clears all fields",
+            "Submits the form",
+            "Creates a link",
+            "Validates only CSS"
+          ],
+          "answer": 1,
+          "explanation": "A submit button initiates form submission and constraint validation unless overridden.",
+          "simpleExplanation": "Remember: A submit button initiates form submission and constraint validation unless overridden."
+        },
+        {
+          "question": "What does meta charset='UTF-8' declare?",
+          "code": null,
+          "options": [
+            "The page's font size",
+            "The character encoding",
+            "The language",
+            "The stylesheet"
+          ],
+          "answer": 1,
+          "explanation": "UTF-8 supports a broad range of characters and symbols.",
+          "simpleExplanation": "Remember: UTF-8 supports a broad range of characters and symbols."
+        },
+        {
+          "question": "What does the viewport meta tag help with?",
+          "code": null,
+          "options": [
+            "Database connections",
+            "Mobile viewport sizing and responsive layout",
+            "Image compression",
+            "Form security"
+          ],
+          "answer": 1,
+          "explanation": "It helps mobile browsers use the device viewport width for responsive layouts.",
+          "simpleExplanation": "Remember: It helps mobile browsers use the device viewport width for responsive layouts."
+        },
+        {
+          "question": "Where should a link to an external CSS stylesheet normally go?",
+          "code": null,
+          "options": [
+            "Inside the head",
+            "Inside title",
+            "Inside the footer only",
+            "Inside a meta element"
+          ],
+          "answer": 0,
+          "explanation": "A link element with rel stylesheet is normally placed in head.",
+          "simpleExplanation": "Remember: A link element with rel stylesheet is normally placed in head."
+        },
+        {
+          "question": "What is the purpose of a meta description?",
+          "code": null,
+          "options": [
+            "It guarantees a higher search ranking",
+            "It provides a page summary that search engines may use as a snippet",
+            "It changes the page background",
+            "It blocks indexing automatically"
+          ],
+          "answer": 1,
+          "explanation": "Search engines may use it for snippets; it does not guarantee ranking or snippet display.",
+          "simpleExplanation": "Remember: Search engines may use it for snippets; it does not guarantee ranking or snippet display."
+        },
+        {
+          "question": "What does the lang attribute help with?",
+          "code": null,
+          "options": [
+            "Automatic translation in every browser",
+            "Pronunciation and language interpretation by assistive technologies and other tools",
+            "Encrypting content",
+            "Setting character encoding"
+          ],
+          "answer": 1,
+          "explanation": "Correct language metadata helps pronunciation and processing.",
+          "simpleExplanation": "Remember: Correct language metadata helps pronunciation and processing."
+        },
+        {
+          "question": "What is a canonical link used for?",
+          "code": null,
+          "options": [
+            "Choosing a primary URL for substantially duplicate or similar content",
+            "Opening a new tab",
+            "Loading a font",
+            "Creating a form"
+          ],
+          "answer": 0,
+          "explanation": "Canonical hints help search engines understand the preferred URL.",
+          "simpleExplanation": "Remember: Canonical hints help search engines understand the preferred URL."
+        },
+        {
+          "question": "Which element sets the document title?",
+          "code": null,
+          "options": [
+            "<meta name='title'> only",
+            "<title>",
+            "<header>",
+            "<h1>"
+          ],
+          "answer": 1,
+          "explanation": "Title is the document title; an h1 is visible page content.",
+          "simpleExplanation": "Remember: Title is the document title; an h1 is visible page content."
+        },
+        {
+          "question": "Does adding semantic HTML guarantee high SEO rankings?",
+          "code": null,
+          "options": [
+            "Yes",
+            "No; it helps structure and understanding but does not guarantee rankings",
+            "Only on mobile",
+            "Only with tables"
+          ],
+          "answer": 1,
+          "explanation": "SEO depends on many factors; no single element guarantees rankings.",
+          "simpleExplanation": "Remember: SEO depends on many factors; no single element guarantees rankings."
+        },
+        {
+          "question": "What is the purpose of rel='stylesheet' on a link element?",
+          "code": null,
+          "options": [
+            "Identify a stylesheet relationship",
+            "Submit a form",
+            "Open a new window",
+            "Mark a canonical page"
+          ],
+          "answer": 0,
+          "explanation": "Rel tells the browser the linked resource is a stylesheet.",
+          "simpleExplanation": "Remember: Rel tells the browser the linked resource is a stylesheet."
+        },
+        {
+          "question": "What does the base element do?",
+          "code": null,
+          "options": [
+            "Sets a base URL and/or default target for relative URLs",
+            "Sets the base font",
+            "Creates a footer",
+            "Defines a page heading"
+          ],
+          "answer": 0,
+          "explanation": "Base in head changes how relative URLs are resolved, so use it carefully.",
+          "simpleExplanation": "Remember: Base in head changes how relative URLs are resolved, so use it carefully."
+        },
+        {
+          "question": "What should alt text do for an informative image?",
+          "code": null,
+          "options": [
+            "Repeat the file name",
+            "Convey the relevant information or function of the image",
+            "Always say 'image of'",
+            "Be as long as possible"
+          ],
+          "answer": 1,
+          "explanation": "Good alt text depends on the image's purpose and context.",
+          "simpleExplanation": "Remember: Good alt text depends on the image's purpose and context."
+        },
+        {
+          "question": "How should a purely decorative image usually be marked?",
+          "code": null,
+          "options": [
+            "alt=\"decorative image\"",
+            "alt=\"\"",
+            "No src attribute",
+            "role=\"heading\""
+          ],
+          "answer": 1,
+          "explanation": "An empty alt allows assistive technology to ignore decorative imagery.",
+          "simpleExplanation": "Remember: An empty alt allows assistive technology to ignore decorative imagery."
+        },
+        {
+          "question": "Why should form inputs have associated labels?",
+          "code": null,
+          "options": [
+            "To make all fields mandatory",
+            "To provide an accessible name and enlarge the clickable label target",
+            "To encrypt values",
+            "To add database columns"
+          ],
+          "answer": 1,
+          "explanation": "Labels improve screen-reader support and usability.",
+          "simpleExplanation": "Remember: Labels improve screen-reader support and usability."
+        },
+        {
+          "question": "What is aria-label used for?",
+          "code": null,
+          "options": [
+            "To replace all HTML semantics",
+            "To provide an accessible name when appropriate",
+            "To change font size",
+            "To validate email addresses"
+          ],
+          "answer": 1,
+          "explanation": "Use ARIA only when native HTML does not already provide the needed accessible name.",
+          "simpleExplanation": "Remember: Use ARIA only when native HTML does not already provide the needed accessible name."
+        },
+        {
+          "question": "What should be preferred when a native HTML element provides the needed behavior?",
+          "code": null,
+          "options": [
+            "A custom div with many ARIA attributes",
+            "The native semantic element",
+            "An image of a button",
+            "A span with onclick only"
+          ],
+          "answer": 1,
+          "explanation": "Native controls usually provide built-in keyboard, focus, and accessibility behavior.",
+          "simpleExplanation": "Remember: Native controls usually provide built-in keyboard, focus, and accessibility behavior."
+        },
+        {
+          "question": "What does tabindex='-1' generally do?",
+          "code": null,
+          "options": [
+            "Disables an element permanently",
+            "Allows programmatic focus but removes it from normal sequential Tab navigation",
+            "Makes it the first Tab stop",
+            "Hides it from assistive technology"
+          ],
+          "answer": 1,
+          "explanation": "It is often used for focus management, such as moving focus to a dialog heading.",
+          "simpleExplanation": "Remember: It is often used for focus management, such as moving focus to a dialog heading."
+        },
+        {
+          "question": "Why is keyboard navigation important?",
+          "code": null,
+          "options": [
+            "Only because search engines require it",
+            "Some users navigate without a mouse, and keyboard access is a core accessibility requirement",
+            "It makes images load faster",
+            "It replaces labels"
+          ],
+          "answer": 1,
+          "explanation": "Interactive controls should be operable with a keyboard.",
+          "simpleExplanation": "Remember: Interactive controls should be operable with a keyboard."
+        },
+        {
+          "question": "Which is the best button label for a button displaying only an X icon?",
+          "code": null,
+          "options": [
+            "X",
+            "Button",
+            "Close dialog",
+            "Click"
+          ],
+          "answer": 2,
+          "explanation": "A meaningful accessible name communicates the action.",
+          "simpleExplanation": "Remember: A meaningful accessible name communicates the action."
+        },
+        {
+          "question": "Should ARIA replace semantic HTML everywhere?",
+          "code": null,
+          "options": [
+            "Yes",
+            "No; use native semantics first and ARIA when needed",
+            "Only on desktop",
+            "Only for images"
+          ],
+          "answer": 1,
+          "explanation": "The first rule of ARIA is generally to use native HTML semantics where possible.",
+          "simpleExplanation": "Remember: The first rule of ARIA is generally to use native HTML semantics where possible."
+        },
+        {
+          "question": "Why should heading levels be used logically?",
+          "code": null,
+          "options": [
+            "They only control font size",
+            "They communicate the content hierarchy and aid navigation",
+            "They replace CSS",
+            "They create hyperlinks automatically"
+          ],
+          "answer": 1,
+          "explanation": "Headings form an outline-like hierarchy for readers and assistive technology.",
+          "simpleExplanation": "Remember: Headings form an outline-like hierarchy for readers and assistive technology."
+        },
+        {
+          "question": "Which element embeds video?",
+          "code": null,
+          "options": [
+            "<movie>",
+            "<video>",
+            "<media>",
+            "<play>"
+          ],
+          "answer": 1,
+          "explanation": "Video embeds video content and can contain source elements and fallback text.",
+          "simpleExplanation": "Remember: Video embeds video content and can contain source elements and fallback text."
+        },
+        {
+          "question": "Which element embeds audio?",
+          "code": null,
+          "options": [
+            "<sound>",
+            "<audio>",
+            "<music>",
+            "<mp3>"
+          ],
+          "answer": 1,
+          "explanation": "Audio embeds sound content.",
+          "simpleExplanation": "Remember: Audio embeds sound content."
+        },
+        {
+          "question": "Which attribute displays built-in playback controls?",
+          "code": null,
+          "options": [
+            "controls",
+            "playbar",
+            "toolbar",
+            "player"
+          ],
+          "answer": 0,
+          "explanation": "Controls requests browser-provided media controls.",
+          "simpleExplanation": "Remember: Controls requests browser-provided media controls."
+        },
+        {
+          "question": "Which element is used to embed another browsing context, often another page?",
+          "code": null,
+          "options": [
+            "<iframe>",
+            "<framebox>",
+            "<portal>",
+            "<webpage>"
+          ],
+          "answer": 0,
+          "explanation": "Iframe embeds another browsing context; security and privacy settings matter.",
+          "simpleExplanation": "Remember: Iframe embeds another browsing context; security and privacy settings matter."
+        },
+        {
+          "question": "How does SVG differ from canvas?",
+          "code": null,
+          "options": [
+            "SVG is a pixel bitmap",
+            "SVG uses scalable vector graphics in the DOM; canvas is a pixel drawing surface",
+            "Canvas requires no script ever",
+            "They are identical"
+          ],
+          "answer": 1,
+          "explanation": "SVG elements remain individually addressable; canvas drawing is primarily pixel-based.",
+          "simpleExplanation": "Remember: SVG elements remain individually addressable; canvas drawing is primarily pixel-based."
+        },
+        {
+          "question": "Which technology is typically used to draw custom pixels with JavaScript?",
+          "code": null,
+          "options": [
+            "Canvas",
+            "Caption",
+            "Fieldset",
+            "Legend"
+          ],
+          "answer": 0,
+          "explanation": "Canvas exposes a drawing surface controlled through scripting.",
+          "simpleExplanation": "Remember: Canvas exposes a drawing surface controlled through scripting."
+        },
+        {
+          "question": "What does the source element do inside picture or audio/video?",
+          "code": null,
+          "options": [
+            "Defines alternate resource sources",
+            "Creates a new page",
+            "Adds a form label",
+            "Stores a cookie"
+          ],
+          "answer": 0,
+          "explanation": "Source lets the browser choose among supplied media resources.",
+          "simpleExplanation": "Remember: Source lets the browser choose among supplied media resources."
+        },
+        {
+          "question": "What is a key consideration when embedding third-party content with iframe?",
+          "code": null,
+          "options": [
+            "There are no security concerns",
+            "Consider permissions, sandboxing, privacy, and trusted origins",
+            "Always allow every permission",
+            "It automatically inherits all page styles"
+          ],
+          "answer": 1,
+          "explanation": "Iframe content can be isolated or restricted with appropriate attributes and policy.",
+          "simpleExplanation": "Remember: Iframe content can be isolated or restricted with appropriate attributes and policy."
+        },
+        {
+          "question": "What does defer do for an external classic script?",
+          "code": null,
+          "options": [
+            "Executes it before parsing starts",
+            "Downloads without blocking parsing and executes after parsing, preserving order among deferred scripts",
+            "Runs only if JavaScript is disabled",
+            "Makes the script CSS"
+          ],
+          "answer": 1,
+          "explanation": "Deferred classic scripts execute after parsing and in document order.",
+          "simpleExplanation": "Remember: Deferred classic scripts execute after parsing and in document order."
+        },
+        {
+          "question": "How does async differ from defer?",
+          "code": null,
+          "options": [
+            "Async execution order is not guaranteed; it executes when downloaded",
+            "Async always waits for parsing to finish",
+            "Defer is only for CSS",
+            "There is no difference"
+          ],
+          "answer": 0,
+          "explanation": "Async is useful for independent scripts; defer is useful when order matters.",
+          "simpleExplanation": "Remember: Async is useful for independent scripts; defer is useful when order matters."
+        },
+        {
+          "question": "What is the purpose of the noscript element?",
+          "code": null,
+          "options": [
+            "Show fallback content when scripting is unavailable or disabled",
+            "Run a script twice",
+            "Load a CSS file",
+            "Store browser data"
+          ],
+          "answer": 0,
+          "explanation": "Noscript provides fallback content for browsers that do not execute scripts.",
+          "simpleExplanation": "Remember: Noscript provides fallback content for browsers that do not execute scripts."
+        },
+        {
+          "question": "What does contenteditable='true' do?",
+          "code": null,
+          "options": [
+            "Automatically saves content to a server",
+            "Allows the element's content to be edited in the browser",
+            "Encrypts the element",
+            "Creates a form submission"
+          ],
+          "answer": 1,
+          "explanation": "It enables editing but does not automatically persist changes.",
+          "simpleExplanation": "Remember: It enables editing but does not automatically persist changes."
+        },
+        {
+          "question": "What is the template element used for?",
+          "code": null,
+          "options": [
+            "Content rendered immediately in every case",
+            "Holding inert HTML that can be cloned and inserted later",
+            "Creating a CSS grid",
+            "Embedding a video"
+          ],
+          "answer": 1,
+          "explanation": "Template contents are not rendered as normal page content until used.",
+          "simpleExplanation": "Remember: Template contents are not rendered as normal page content until used."
+        },
+        {
+          "question": "What does dialog.showModal() do?",
+          "code": null,
+          "options": [
+            "Deletes the dialog",
+            "Opens a modal dialog with a backdrop and modal behavior",
+            "Opens a new browser tab",
+            "Submits a form"
+          ],
+          "answer": 1,
+          "explanation": "ShowModal places the dialog in the top layer and makes the rest of the document modal.",
+          "simpleExplanation": "Remember: ShowModal places the dialog in the top layer and makes the rest of the document modal."
+        },
+        {
+          "question": "What does data-user-id='42' map to in JavaScript dataset?",
+          "code": null,
+          "options": [
+            "dataset['data-user-id']",
+            "dataset.userId",
+            "dataset.user-id",
+            "dataset.dataUserId"
+          ],
+          "answer": 1,
+          "explanation": "Hyphenated data attribute names are exposed in camelCase through dataset.",
+          "simpleExplanation": "Remember: Hyphenated data attribute names are exposed in camelCase through dataset."
+        },
+        {
+          "question": "What is Shadow DOM commonly used for?",
+          "code": null,
+          "options": [
+            "Encrypting HTML",
+            "Encapsulating a component's internal markup and styles",
+            "Saving passwords",
+            "Replacing all CSS"
+          ],
+          "answer": 1,
+          "explanation": "Shadow DOM helps isolate component internals from the surrounding document.",
+          "simpleExplanation": "Remember: Shadow DOM helps isolate component internals from the surrounding document."
+        },
+        {
+          "question": "What does localStorage do?",
+          "code": null,
+          "options": [
+            "Stores data that generally persists until cleared",
+            "Stores data only on a server",
+            "Sends every value with each request automatically",
+            "Only stores images"
+          ],
+          "answer": 0,
+          "explanation": "Local storage is client-side storage and is not automatically sent with HTTP requests.",
+          "simpleExplanation": "Remember: Local storage is client-side storage and is not automatically sent with HTTP requests."
+        },
+        {
+          "question": "Does putting a secret in a hidden input make it secure?",
+          "code": null,
+          "options": [
+            "Yes, because it is invisible",
+            "No, users can inspect or alter it",
+            "Yes, if its name starts with underscore",
+            "Only on mobile"
+          ],
+          "answer": 1,
+          "explanation": "Hidden fields are client-controlled input and must not be trusted as secret or authoritative.",
+          "simpleExplanation": "Remember: Hidden fields are client-controlled input and must not be trusted as secret or authoritative."
+        },
+        {
+          "question": "Can HTML client-side validation be bypassed?",
+          "code": null,
+          "options": [
+            "No, never",
+            "Yes; server-side validation is also needed",
+            "Only by administrators",
+            "Only with CSS"
+          ],
+          "answer": 1,
+          "explanation": "Client-side checks improve usability but are not a security boundary.",
+          "simpleExplanation": "Remember: Client-side checks improve usability but are not a security boundary."
+        },
+        {
+          "question": "What happens if an input has required but is empty during normal form submission?",
+          "code": null,
+          "options": [
+            "The browser typically blocks submission and reports a validation error",
+            "It always sends the form",
+            "The browser fills a random value",
+            "The page is deleted"
+          ],
+          "answer": 0,
+          "explanation": "Built-in constraint validation prevents ordinary submission until the field is valid.",
+          "simpleExplanation": "Remember: Built-in constraint validation prevents ordinary submission until the field is valid."
+        },
+        {
+          "question": "Which is the best approach to spacing and colors?",
+          "code": null,
+          "options": [
+            "Use repeated spaces in HTML",
+            "Use CSS for presentation",
+            "Use heading tags for spacing",
+            "Use table cells for every gap"
+          ],
+          "answer": 1,
+          "explanation": "Separate structure from presentation for maintainability.",
+          "simpleExplanation": "Remember: Separate structure from presentation for maintainability."
+        },
+        {
+          "question": "Should an id be repeated across many unrelated elements on the same page?",
+          "code": null,
+          "options": [
+            "Yes, always",
+            "No; IDs should be unique within the document",
+            "Only in forms",
+            "Only when CSS is used"
+          ],
+          "answer": 1,
+          "explanation": "Duplicate IDs can cause incorrect label, script, and fragment behavior.",
+          "simpleExplanation": "Remember: Duplicate IDs can cause incorrect label, script, and fragment behavior."
+        },
+        {
+          "question": "What is a common risk of using target='_blank' without appropriate link handling?",
+          "code": null,
+          "options": [
+            "It changes the image format",
+            "The opened page may gain access to the opener in some contexts",
+            "It encrypts the page",
+            "It blocks all JavaScript"
+          ],
+          "answer": 1,
+          "explanation": "Using rel=noopener is a safe, common practice for new browsing contexts.",
+          "simpleExplanation": "Remember: Using rel=noopener is a safe, common practice for new browsing contexts."
+        },
+        {
+          "question": "Does an HTML comment hide sensitive information from users?",
+          "code": null,
+          "options": [
+            "Yes",
+            "No; source can be inspected",
+            "Only if minified",
+            "Only on HTTPS"
+          ],
+          "answer": 1,
+          "explanation": "Comments are included in the document source and must not contain secrets.",
+          "simpleExplanation": "Remember: Comments are included in the document source and must not contain secrets."
+        },
+        {
+          "question": "What is the role of the action attribute on a form?",
+          "code": null,
+          "options": [
+            "It specifies the submission destination URL",
+            "It selects a font",
+            "It sets the field label",
+            "It disables validation"
+          ],
+          "answer": 0,
+          "explanation": "Action tells the browser where to send form data.",
+          "simpleExplanation": "Remember: Action tells the browser where to send form data."
+        },
+        {
+          "question": "What is progressive enhancement?",
+          "code": null,
+          "options": [
+            "Build only for the newest browser",
+            "Start with robust core content and add enhancements where supported",
+            "Use JavaScript for all text",
+            "Avoid semantic elements"
+          ],
+          "answer": 1,
+          "explanation": "Core content and functionality should remain available as enhancements are added.",
+          "simpleExplanation": "Remember: Core content and functionality should remain available as enhancements are added."
+        },
+        {
+          "question": "What text appears as the top-level heading? <h1>Welcome</h1>",
+          "code": null,
+          "options": [
+            "Welcome",
+            "<h1>",
+            "Nothing",
+            "Error"
+          ],
+          "answer": 0,
+          "explanation": "The browser renders Welcome as a level-one heading.",
+          "simpleExplanation": "Remember: The browser renders Welcome as a level-one heading."
+        },
+        {
+          "question": "What does <a href='about.html'>About</a> do?",
+          "code": null,
+          "options": [
+            "Displays an image",
+            "Creates a link to a relative path named about.html",
+            "Submits a form",
+            "Creates a heading"
+          ],
+          "answer": 1,
+          "explanation": "The anchor's href points to a relative URL.",
+          "simpleExplanation": "Remember: The anchor's href points to a relative URL."
+        },
+        {
+          "question": "What is the value of document.getElementById('u').dataset.userId when the element has data-user-id='42'?",
+          "code": null,
+          "options": [
+            "42 as a string",
+            "null always",
+            "undefined always",
+            "user-id"
+          ],
+          "answer": 0,
+          "explanation": "Dataset values are strings; the camelCase property is userId.",
+          "simpleExplanation": "Remember: Dataset values are strings; the camelCase property is userId."
+        },
+        {
+          "question": "What is wrong with <img src='cat.jpg'> from an accessibility perspective if the image is informative?",
+          "code": null,
+          "options": [
+            "Images cannot be used in HTML",
+            "It lacks an appropriate text alternative",
+            "Src is invalid",
+            "All images must be links"
+          ],
+          "answer": 1,
+          "explanation": "Informative images should normally have meaningful alt text.",
+          "simpleExplanation": "Remember: Informative images should normally have meaningful alt text."
+        },
+        {
+          "question": "What happens when a button inside a form has no type attribute in ordinary HTML form usage?",
+          "code": null,
+          "options": [
+            "It is always a reset button",
+            "It generally behaves as a submit button",
+            "It is always disabled",
+            "It becomes a link"
+          ],
+          "answer": 1,
+          "explanation": "A button associated with a form defaults to submit behavior unless otherwise specified.",
+          "simpleExplanation": "Remember: A button associated with a form defaults to submit behavior unless otherwise specified."
+        },
+        {
+          "question": "What does <input type='checkbox' checked> mean?",
+          "code": null,
+          "options": [
+            "The checkbox starts checked",
+            "The checkbox cannot be changed",
+            "The checkbox is hidden",
+            "The form is submitted automatically"
+          ],
+          "answer": 0,
+          "explanation": "Checked sets the initial checked state in markup.",
+          "simpleExplanation": "Remember: Checked sets the initial checked state in markup."
+        },
+        {
+          "question": "Which is the proper way to show literal <p> in visible text?",
+          "code": null,
+          "options": [
+            "Write raw <p>",
+            "&lt;p&gt;",
+            "<tag p>",
+            "Use a CSS class"
+          ],
+          "answer": 1,
+          "explanation": "Escape the angle brackets so the browser treats them as text.",
+          "simpleExplanation": "Remember: Escape the angle brackets so the browser treats them as text."
+        },
+        {
+          "question": "What is the likely purpose of <meta name='viewport' content='width=device-width, initial-scale=1.0'>?",
+          "code": null,
+          "options": [
+            "Mobile responsive viewport setup",
+            "Form validation",
+            "Audio controls",
+            "Table sorting"
+          ],
+          "answer": 0,
+          "explanation": "It helps establish the viewport dimensions and initial scale.",
+          "simpleExplanation": "Remember: It helps establish the viewport dimensions and initial scale."
+        }
+      ]
     },
     {
       "id": "css",
       "name": "CSS",
-      "questions": []
+      "questions": [
+        {
+          "question": "CSS stands for?",
+          "code": null,
+          "options": [
+            "Computer Style Syntax",
+            "Cascading Style Sheets",
+            "Creative Styling System",
+            "Color Style Software"
+          ],
+          "answer": 1,
+          "explanation": "CSS controls the presentation of HTML.",
+          "simpleExplanation": "Remember: CSS controls the presentation of HTML."
+        },
+        {
+          "question": "Which HTML element contains internal CSS?",
+          "code": null,
+          "options": [
+            "<css>",
+            "<style>",
+            "<script>",
+            "<design>"
+          ],
+          "answer": 1,
+          "explanation": "Use the style element, commonly inside head.",
+          "simpleExplanation": "Remember: Use the style element, commonly inside head."
+        },
+        {
+          "question": "Which element links an external stylesheet?",
+          "code": null,
+          "options": [
+            "<link>",
+            "<css>",
+            "<style>",
+            "<script>"
+          ],
+          "answer": 0,
+          "explanation": "Use <link rel=\"stylesheet\" href=\"style.css\">.",
+          "simpleExplanation": "Remember: Use <link rel=\"stylesheet\" href=\"style.css\">."
+        },
+        {
+          "question": "Which attribute applies inline CSS?",
+          "code": null,
+          "options": [
+            "class",
+            "id",
+            "style",
+            "css"
+          ],
+          "answer": 2,
+          "explanation": "The style attribute contains declarations for that element.",
+          "simpleExplanation": "Remember: The style attribute contains declarations for that element."
+        },
+        {
+          "question": "Correct CSS syntax?",
+          "code": null,
+          "options": [
+            "selector { property: value; }",
+            "property = value selector",
+            "{selector: property=value}",
+            "selector(property value)"
+          ],
+          "answer": 0,
+          "explanation": "A rule has a selector and declaration block.",
+          "simpleExplanation": "Remember: A rule has a selector and declaration block."
+        },
+        {
+          "question": "CSS comments use?",
+          "code": null,
+          "options": [
+            "// comment",
+            "<!-- comment -->",
+            "/* comment */",
+            "# comment"
+          ],
+          "answer": 2,
+          "explanation": "CSS comments start with /* and end with */.",
+          "simpleExplanation": "Remember: CSS comments start with /* and end with */."
+        },
+        {
+          "question": "Select class card:",
+          "code": null,
+          "options": [
+            "#card",
+            ".card",
+            "card",
+            "*card"
+          ],
+          "answer": 1,
+          "explanation": "A dot selects a class.",
+          "simpleExplanation": "Remember: A dot selects a class."
+        },
+        {
+          "question": "Select ID header:",
+          "code": null,
+          "options": [
+            ".header",
+            "header",
+            "#header",
+            "*header"
+          ],
+          "answer": 2,
+          "explanation": "A hash selects an ID.",
+          "simpleExplanation": "Remember: A hash selects an ID."
+        },
+        {
+          "question": "Select all paragraph elements:",
+          "code": null,
+          "options": [
+            "#p",
+            ".p",
+            "p",
+            "*p"
+          ],
+          "answer": 2,
+          "explanation": "p is a type selector.",
+          "simpleExplanation": "Remember: p is a type selector."
+        },
+        {
+          "question": "Universal selector is:",
+          "code": null,
+          "options": [
+            "&",
+            "*",
+            "all",
+            "%"
+          ],
+          "answer": 1,
+          "explanation": "The asterisk matches all elements.",
+          "simpleExplanation": "Remember: The asterisk matches all elements."
+        },
+        {
+          "question": "Select paragraphs anywhere inside article:",
+          "code": null,
+          "options": [
+            "article > p",
+            "article p",
+            "article + p",
+            "article ~ p"
+          ],
+          "answer": 1,
+          "explanation": "A space is the descendant combinator.",
+          "simpleExplanation": "Remember: A space is the descendant combinator."
+        },
+        {
+          "question": "Select only direct child paragraphs of .box:",
+          "code": null,
+          "options": [
+            ".box p",
+            ".box > p",
+            ".box + p",
+            ".box ~ p"
+          ],
+          "answer": 1,
+          "explanation": "The > combinator selects direct children.",
+          "simpleExplanation": "Remember: The > combinator selects direct children."
+        },
+        {
+          "question": "Select email inputs:",
+          "code": null,
+          "options": [
+            "input.email",
+            "input#email",
+            "input[type=\"email\"]",
+            "input:email"
+          ],
+          "answer": 2,
+          "explanation": "Square brackets create an attribute selector.",
+          "simpleExplanation": "Remember: Square brackets create an attribute selector."
+        },
+        {
+          "question": "What does h1, h2 select?",
+          "code": null,
+          "options": [
+            "h2 inside h1",
+            "Both h1 and h2",
+            "Only h1 with class h2",
+            "Adjacent headings"
+          ],
+          "answer": 1,
+          "explanation": "Comma groups selectors.",
+          "simpleExplanation": "Remember: Comma groups selectors."
+        },
+        {
+          "question": "Adjacent sibling combinator is:",
+          "code": null,
+          "options": [
+            "A + B",
+            "A > B",
+            "A B",
+            "A ~ B"
+          ],
+          "answer": 0,
+          "explanation": "+ selects the immediately following sibling.",
+          "simpleExplanation": "Remember: + selects the immediately following sibling."
+        },
+        {
+          "question": "Which is usually more specific: #menu or .menu?",
+          "code": null,
+          "options": [
+            ".menu",
+            "#menu",
+            "Equal",
+            "Neither"
+          ],
+          "answer": 1,
+          "explanation": "An ID selector has higher specificity than a class selector.",
+          "simpleExplanation": "Remember: An ID selector has higher specificity than a class selector."
+        },
+        {
+          "question": "Which declaration uses important?",
+          "code": null,
+          "options": [
+            "color:red;",
+            "important: color red;",
+            "color:red !important;",
+            "color !important red;"
+          ],
+          "answer": 2,
+          "explanation": "!important affects cascade priority; use sparingly.",
+          "simpleExplanation": "Remember: !important affects cascade priority; use sparingly."
+        },
+        {
+          "question": "Which property commonly inherits?",
+          "code": null,
+          "options": [
+            "margin",
+            "padding",
+            "color",
+            "border"
+          ],
+          "answer": 2,
+          "explanation": "Text properties such as color commonly inherit.",
+          "simpleExplanation": "Remember: Text properties such as color commonly inherit."
+        },
+        {
+          "question": "When equally specific rules conflict, which usually wins?",
+          "code": null,
+          "options": [
+            "First rule",
+            "Later rule in source order",
+            "Shorter rule",
+            "Rule with fewer properties"
+          ],
+          "answer": 1,
+          "explanation": "Source order resolves otherwise equal cascade rules.",
+          "simpleExplanation": "Remember: Source order resolves otherwise equal cascade rules."
+        },
+        {
+          "question": "What does inherit do?",
+          "code": null,
+          "options": [
+            "Uses parent's value",
+            "Resets browser",
+            "Makes important",
+            "Removes property"
+          ],
+          "answer": 0,
+          "explanation": "inherit explicitly takes the parent's computed value.",
+          "simpleExplanation": "Remember: inherit explicitly takes the parent's computed value."
+        },
+        {
+          "question": "Four main box-model parts are:",
+          "code": null,
+          "options": [
+            "Text,image,link,list",
+            "Content,padding,border,margin",
+            "Width,height,color,font",
+            "Top,right,bottom,left"
+          ],
+          "answer": 1,
+          "explanation": "These layers describe an element's box.",
+          "simpleExplanation": "Remember: These layers describe an element's box."
+        },
+        {
+          "question": "Padding is space:",
+          "code": null,
+          "options": [
+            "Outside border",
+            "Between content and border",
+            "Between sibling elements only",
+            "Outside margin"
+          ],
+          "answer": 1,
+          "explanation": "Padding sits inside the border.",
+          "simpleExplanation": "Remember: Padding sits inside the border."
+        },
+        {
+          "question": "Margin is space:",
+          "code": null,
+          "options": [
+            "Outside border",
+            "Inside content",
+            "Between letters",
+            "Border thickness"
+          ],
+          "answer": 0,
+          "explanation": "Margin creates space outside an element's border.",
+          "simpleExplanation": "Remember: Margin creates space outside an element's border."
+        },
+        {
+          "question": "box-sizing:border-box means:",
+          "code": null,
+          "options": [
+            "Padding excluded from width",
+            "Padding and border included in declared width/height",
+            "Border removed",
+            "Margins zero"
+          ],
+          "answer": 1,
+          "explanation": "Declared dimensions include content, padding, and border.",
+          "simpleExplanation": "Remember: Declared dimensions include content, padding, and border."
+        },
+        {
+          "question": "Default box-sizing is:",
+          "code": null,
+          "options": [
+            "border-box",
+            "content-box",
+            "padding-box",
+            "margin-box"
+          ],
+          "answer": 1,
+          "explanation": "The initial value is content-box.",
+          "simpleExplanation": "Remember: The initial value is content-box."
+        },
+        {
+          "question": "Which unit is relative to root font size?",
+          "code": null,
+          "options": [
+            "em",
+            "rem",
+            "px",
+            "vh"
+          ],
+          "answer": 1,
+          "explanation": "rem is relative to the root element's font size.",
+          "simpleExplanation": "Remember: rem is relative to the root element's font size."
+        },
+        {
+          "question": "Which unit is relative to viewport width?",
+          "code": null,
+          "options": [
+            "vw",
+            "vh",
+            "rem",
+            "pt"
+          ],
+          "answer": 0,
+          "explanation": "1vw equals 1% of viewport width.",
+          "simpleExplanation": "Remember: 1vw equals 1% of viewport width."
+        },
+        {
+          "question": "Which property sets background color?",
+          "code": null,
+          "options": [
+            "color",
+            "background-color",
+            "font-color",
+            "fill-color"
+          ],
+          "answer": 1,
+          "explanation": "color sets foreground text color.",
+          "simpleExplanation": "Remember: color sets foreground text color."
+        },
+        {
+          "question": "Which property rounds corners?",
+          "code": null,
+          "options": [
+            "corner",
+            "border-radius",
+            "round-border",
+            "radius"
+          ],
+          "answer": 1,
+          "explanation": "border-radius rounds box corners.",
+          "simpleExplanation": "Remember: border-radius rounds box corners."
+        },
+        {
+          "question": "Which property creates a box shadow?",
+          "code": null,
+          "options": [
+            "text-shadow",
+            "box-shadow",
+            "border-shadow",
+            "shadow-box"
+          ],
+          "answer": 1,
+          "explanation": "box-shadow draws a shadow around the box.",
+          "simpleExplanation": "Remember: box-shadow draws a shadow around the box."
+        },
+        {
+          "question": "Which property sets text size?",
+          "code": null,
+          "options": [
+            "font-style",
+            "font-size",
+            "text-weight",
+            "size"
+          ],
+          "answer": 1,
+          "explanation": "font-size sets the size of text.",
+          "simpleExplanation": "Remember: font-size sets the size of text."
+        },
+        {
+          "question": "Which property controls line spacing?",
+          "code": null,
+          "options": [
+            "letter-spacing",
+            "word-spacing",
+            "line-height",
+            "text-indent"
+          ],
+          "answer": 2,
+          "explanation": "line-height controls line-box height.",
+          "simpleExplanation": "Remember: line-height controls line-box height."
+        },
+        {
+          "question": "Make text uppercase with:",
+          "code": null,
+          "options": [
+            "text-case:upper",
+            "font-transform:uppercase",
+            "text-transform:uppercase",
+            "case:capital"
+          ],
+          "answer": 2,
+          "explanation": "text-transform changes how text is displayed.",
+          "simpleExplanation": "Remember: text-transform changes how text is displayed."
+        },
+        {
+          "question": "Which property underlines text?",
+          "code": null,
+          "options": [
+            "text-decoration",
+            "font-decoration",
+            "text-line",
+            "underline"
+          ],
+          "answer": 0,
+          "explanation": "text-decoration can set underline and line-through.",
+          "simpleExplanation": "Remember: text-decoration can set underline and line-through."
+        },
+        {
+          "question": "Which property controls border width/style/color shorthand?",
+          "code": null,
+          "options": [
+            "outline",
+            "border",
+            "edge",
+            "frame"
+          ],
+          "answer": 1,
+          "explanation": "The border shorthand can set all three.",
+          "simpleExplanation": "Remember: The border shorthand can set all three."
+        },
+        {
+          "question": "A block element usually:",
+          "code": null,
+          "options": [
+            "Never accepts width",
+            "Starts a new line and fills available width",
+            "Is invisible",
+            "Floats automatically"
+          ],
+          "answer": 1,
+          "explanation": "Block boxes normally start on a new line.",
+          "simpleExplanation": "Remember: Block boxes normally start on a new line."
+        },
+        {
+          "question": "Which display allows width/height but stays inline-level?",
+          "code": null,
+          "options": [
+            "inline",
+            "inline-block",
+            "none",
+            "contents-only"
+          ],
+          "answer": 1,
+          "explanation": "inline-block participates inline and accepts dimensions.",
+          "simpleExplanation": "Remember: inline-block participates inline and accepts dimensions."
+        },
+        {
+          "question": "display:none does what?",
+          "code": null,
+          "options": [
+            "Hides but keeps space",
+            "Removes element from layout",
+            "Makes transparent only",
+            "Moves behind others"
+          ],
+          "answer": 1,
+          "explanation": "It does not generate a layout box.",
+          "simpleExplanation": "Remember: It does not generate a layout box."
+        },
+        {
+          "question": "visibility:hidden generally:",
+          "code": null,
+          "options": [
+            "Removes layout space",
+            "Hides but preserves layout space",
+            "Deletes element",
+            "Makes it clickable"
+          ],
+          "answer": 1,
+          "explanation": "The hidden element still occupies space.",
+          "simpleExplanation": "Remember: The hidden element still occupies space."
+        },
+        {
+          "question": "Which property handles overflowing content?",
+          "code": null,
+          "options": [
+            "overflow",
+            "excess",
+            "content-fit",
+            "clip-text-only"
+          ],
+          "answer": 0,
+          "explanation": "overflow controls clipping and scrolling.",
+          "simpleExplanation": "Remember: overflow controls clipping and scrolling."
+        },
+        {
+          "question": "Which value can allow scrolling?",
+          "code": null,
+          "options": [
+            "overflow:scroll",
+            "overflow:text",
+            "display:scroll",
+            "position:scroll"
+          ],
+          "answer": 0,
+          "explanation": "overflow:scroll provides scrolling mechanisms.",
+          "simpleExplanation": "Remember: overflow:scroll provides scrolling mechanisms."
+        },
+        {
+          "question": "Which position keeps normal-flow space and offsets from normal position?",
+          "code": null,
+          "options": [
+            "absolute",
+            "fixed",
+            "relative",
+            "static"
+          ],
+          "answer": 2,
+          "explanation": "relative positioning retains the original flow space.",
+          "simpleExplanation": "Remember: relative positioning retains the original flow space."
+        },
+        {
+          "question": "Which position removes an element from normal flow?",
+          "code": null,
+          "options": [
+            "absolute",
+            "static",
+            "relative",
+            "inline"
+          ],
+          "answer": 0,
+          "explanation": "Absolutely positioned elements are removed from normal flow.",
+          "simpleExplanation": "Remember: Absolutely positioned elements are removed from normal flow."
+        },
+        {
+          "question": "Which position commonly anchors to viewport?",
+          "code": null,
+          "options": [
+            "static",
+            "fixed",
+            "relative",
+            "inline"
+          ],
+          "answer": 1,
+          "explanation": "Fixed positioning is commonly viewport-relative.",
+          "simpleExplanation": "Remember: Fixed positioning is commonly viewport-relative."
+        },
+        {
+          "question": "Default position value?",
+          "code": null,
+          "options": [
+            "relative",
+            "absolute",
+            "fixed",
+            "static"
+          ],
+          "answer": 3,
+          "explanation": "Elements are static by default.",
+          "simpleExplanation": "Remember: Elements are static by default."
+        },
+        {
+          "question": "Sticky positioning is useful for:",
+          "code": null,
+          "options": [
+            "Bold text",
+            "Keeping an element in view after a scroll threshold",
+            "Removing layout space",
+            "Creating grid"
+          ],
+          "answer": 1,
+          "explanation": "Sticky elements stick within their scrolling context.",
+          "simpleExplanation": "Remember: Sticky elements stick within their scrolling context."
+        },
+        {
+          "question": "z-index commonly affects:",
+          "code": null,
+          "options": [
+            "Font size",
+            "Stacking order",
+            "Horizontal alignment",
+            "Width"
+          ],
+          "answer": 1,
+          "explanation": "It controls stacking order within applicable stacking contexts.",
+          "simpleExplanation": "Remember: It controls stacking order within applicable stacking contexts."
+        },
+        {
+          "question": "Which declaration hides an element visually but preserves layout space?",
+          "code": null,
+          "options": [
+            "display:none",
+            "visibility:hidden",
+            "position:absolute",
+            "overflow:hidden"
+          ],
+          "answer": 1,
+          "explanation": "visibility:hidden preserves the element's layout space.",
+          "simpleExplanation": "Remember: visibility:hidden preserves the element's layout space."
+        },
+        {
+          "question": "Which property can make content scroll horizontally?",
+          "code": null,
+          "options": [
+            "overflow-x",
+            "scroll-text",
+            "x-position",
+            "horizontal-display"
+          ],
+          "answer": 0,
+          "explanation": "overflow-x controls horizontal overflow.",
+          "simpleExplanation": "Remember: overflow-x controls horizontal overflow."
+        },
+        {
+          "question": "Which property moves an element to the left and lets text wrap around it?",
+          "code": null,
+          "options": [
+            "float:left",
+            "display:flex",
+            "position:fixed",
+            "align:left"
+          ],
+          "answer": 0,
+          "explanation": "Float is traditionally used to wrap text around an element.",
+          "simpleExplanation": "Remember: Float is traditionally used to wrap text around an element."
+        },
+        {
+          "question": "Create a flex container with:",
+          "code": null,
+          "options": [
+            "display:flex",
+            "position:flex",
+            "flex:display",
+            "layout:flex"
+          ],
+          "answer": 0,
+          "explanation": "display:flex enables Flexbox.",
+          "simpleExplanation": "Remember: display:flex enables Flexbox."
+        },
+        {
+          "question": "Flex main-axis alignment uses:",
+          "code": null,
+          "options": [
+            "align-items",
+            "justify-content",
+            "text-align",
+            "order"
+          ],
+          "answer": 1,
+          "explanation": "justify-content distributes items along the main axis.",
+          "simpleExplanation": "Remember: justify-content distributes items along the main axis."
+        },
+        {
+          "question": "Cross-axis alignment in a single flex line uses:",
+          "code": null,
+          "options": [
+            "justify-items",
+            "align-items",
+            "flex-direction",
+            "order"
+          ],
+          "answer": 1,
+          "explanation": "align-items controls cross-axis alignment.",
+          "simpleExplanation": "Remember: align-items controls cross-axis alignment."
+        },
+        {
+          "question": "Change Flexbox main-axis direction with:",
+          "code": null,
+          "options": [
+            "flex-direction",
+            "align-direction",
+            "item-order",
+            "main-axis"
+          ],
+          "answer": 0,
+          "explanation": "Values include row and column.",
+          "simpleExplanation": "Remember: Values include row and column."
+        },
+        {
+          "question": "Allow flex items to wrap with:",
+          "code": null,
+          "options": [
+            "flex-wrap:wrap",
+            "flex-line:new",
+            "display:wrap",
+            "overflow:wrap"
+          ],
+          "answer": 0,
+          "explanation": "flex-wrap permits multiple flex lines.",
+          "simpleExplanation": "Remember: flex-wrap permits multiple flex lines."
+        },
+        {
+          "question": "What does gap do in Flexbox/Grid?",
+          "code": null,
+          "options": [
+            "Adds space between items",
+            "Adds border",
+            "Changes order",
+            "Fixes item width"
+          ],
+          "answer": 0,
+          "explanation": "gap defines gutters between rows and columns/items.",
+          "simpleExplanation": "Remember: gap defines gutters between rows and columns/items."
+        },
+        {
+          "question": "Which property lets a flex item grow?",
+          "code": null,
+          "options": [
+            "flex-grow",
+            "flex-color",
+            "grow-width",
+            "item-expand"
+          ],
+          "answer": 0,
+          "explanation": "flex-grow sets an item's growth factor.",
+          "simpleExplanation": "Remember: flex-grow sets an item's growth factor."
+        },
+        {
+          "question": "Default flex-direction?",
+          "code": null,
+          "options": [
+            "column",
+            "row",
+            "row-reverse",
+            "column-reverse"
+          ],
+          "answer": 1,
+          "explanation": "The initial value is row.",
+          "simpleExplanation": "Remember: The initial value is row."
+        },
+        {
+          "question": "Create a grid container with:",
+          "code": null,
+          "options": [
+            "display:grid",
+            "position:grid",
+            "grid:display",
+            "layout:table-grid"
+          ],
+          "answer": 0,
+          "explanation": "display:grid establishes CSS Grid.",
+          "simpleExplanation": "Remember: display:grid establishes CSS Grid."
+        },
+        {
+          "question": "Define grid columns with:",
+          "code": null,
+          "options": [
+            "grid-columns",
+            "grid-template-columns",
+            "columns-template",
+            "grid-column-size"
+          ],
+          "answer": 1,
+          "explanation": "grid-template-columns defines column tracks.",
+          "simpleExplanation": "Remember: grid-template-columns defines column tracks."
+        },
+        {
+          "question": "repeat(3, 1fr) creates:",
+          "code": null,
+          "options": [
+            "Three equal fractional tracks",
+            "Three pixels total",
+            "One vertical track",
+            "Hidden columns"
+          ],
+          "answer": 0,
+          "explanation": "It repeats a 1fr track three times.",
+          "simpleExplanation": "Remember: It repeats a 1fr track three times."
+        },
+        {
+          "question": "What does 1fr mean in Grid?",
+          "code": null,
+          "options": [
+            "One pixel",
+            "A fraction of available space",
+            "One font size",
+            "One viewport height"
+          ],
+          "answer": 1,
+          "explanation": "fr distributes available grid space.",
+          "simpleExplanation": "Remember: fr distributes available grid space."
+        },
+        {
+          "question": "Which property sets Grid row/column gutters?",
+          "code": null,
+          "options": [
+            "gap",
+            "grid-margin",
+            "track-space",
+            "spacing"
+          ],
+          "answer": 0,
+          "explanation": "gap creates gutters.",
+          "simpleExplanation": "Remember: gap creates gutters."
+        },
+        {
+          "question": "Which layout is designed for two dimensions?",
+          "code": null,
+          "options": [
+            "Grid",
+            "text-align",
+            "float only",
+            "font-weight"
+          ],
+          "answer": 0,
+          "explanation": "Grid handles rows and columns together.",
+          "simpleExplanation": "Remember: Grid handles rows and columns together."
+        },
+        {
+          "question": "Which property changes the visual order of flex items?",
+          "code": null,
+          "options": [
+            "order",
+            "z-index only",
+            "flex-direction only",
+            "position-order"
+          ],
+          "answer": 0,
+          "explanation": "order changes visual order; source order remains important for accessibility.",
+          "simpleExplanation": "Remember: order changes visual order; source order remains important for accessibility."
+        },
+        {
+          "question": "Which Flexbox property controls whether items wrap?",
+          "code": null,
+          "options": [
+            "flex-wrap",
+            "flex-grow",
+            "align-items",
+            "justify-content"
+          ],
+          "answer": 0,
+          "explanation": "flex-wrap controls wrapping onto multiple lines.",
+          "simpleExplanation": "Remember: flex-wrap controls wrapping onto multiple lines."
+        },
+        {
+          "question": "Which pseudo-class applies while pointer hovers over an element?",
+          "code": null,
+          "options": [
+            ":focus",
+            ":hover",
+            "::before",
+            ":checked"
+          ],
+          "answer": 1,
+          "explanation": ":hover matches the hovered element.",
+          "simpleExplanation": "Remember: :hover matches the hovered element."
+        },
+        {
+          "question": "Which pseudo-class matches a focused control?",
+          "code": null,
+          "options": [
+            ":active",
+            ":focus",
+            "::focus",
+            ":tab"
+          ],
+          "answer": 1,
+          "explanation": ":focus matches an element that has focus.",
+          "simpleExplanation": "Remember: :focus matches an element that has focus."
+        },
+        {
+          "question": "Which pseudo-class targets a checked checkbox?",
+          "code": null,
+          "options": [
+            ":selected",
+            ":checked",
+            ":on",
+            "::checked"
+          ],
+          "answer": 1,
+          "explanation": ":checked matches checked form controls.",
+          "simpleExplanation": "Remember: :checked matches checked form controls."
+        },
+        {
+          "question": "Which is pseudo-element syntax?",
+          "code": null,
+          "options": [
+            "::before",
+            "#before",
+            ".before()",
+            "@before"
+          ],
+          "answer": 0,
+          "explanation": "Double-colon syntax is standard for pseudo-elements.",
+          "simpleExplanation": "Remember: Double-colon syntax is standard for pseudo-elements."
+        },
+        {
+          "question": "What does ::after commonly create?",
+          "code": null,
+          "options": [
+            "Generated content after an element's content",
+            "A form submission",
+            "HTML source changes",
+            "JavaScript"
+          ],
+          "answer": 0,
+          "explanation": "It creates a pseudo-element, often paired with content.",
+          "simpleExplanation": "Remember: It creates a pseudo-element, often paired with content."
+        },
+        {
+          "question": ":nth-child(even) selects:",
+          "code": null,
+          "options": [
+            "Even-numbered child positions",
+            "Last row only",
+            "Hovered rows",
+            "Empty rows"
+          ],
+          "answer": 0,
+          "explanation": "It matches elements in even-numbered child positions.",
+          "simpleExplanation": "Remember: It matches elements in even-numbered child positions."
+        },
+        {
+          "question": "Responsive design means:",
+          "code": null,
+          "options": [
+            "Layout adapts to different viewports",
+            "Desktop only",
+            "No CSS",
+            "Reload on every click"
+          ],
+          "answer": 0,
+          "explanation": "Responsive pages adapt to available space and device context.",
+          "simpleExplanation": "Remember: Responsive pages adapt to available space and device context."
+        },
+        {
+          "question": "Which at-rule is used for media queries?",
+          "code": null,
+          "options": [
+            "@screen",
+            "@media",
+            "@responsive",
+            "@viewport-width"
+          ],
+          "answer": 1,
+          "explanation": "@media applies styles conditionally.",
+          "simpleExplanation": "Remember: @media applies styles conditionally."
+        },
+        {
+          "question": "Target viewport 600px wide or narrower:",
+          "code": null,
+          "options": [
+            "@media (min-width:600px)",
+            "@media (max-width:600px)",
+            "@screen 600px",
+            "@media width <= 600 only"
+          ],
+          "answer": 1,
+          "explanation": "max-width targets viewports up to the specified width.",
+          "simpleExplanation": "Remember: max-width targets viewports up to the specified width."
+        },
+        {
+          "question": "Mobile-first usually means:",
+          "code": null,
+          "options": [
+            "Base styles for small screens, enhance for larger",
+            "Mobile apps only",
+            "Disable desktop",
+            "Fixed widths only"
+          ],
+          "answer": 0,
+          "explanation": "Base styles are often paired with min-width queries.",
+          "simpleExplanation": "Remember: Base styles are often paired with min-width queries."
+        },
+        {
+          "question": "Why use max-width:100% on images?",
+          "code": null,
+          "options": [
+            "Prevent image exceeding container",
+            "Force 9000px width",
+            "Make image square",
+            "Force overflow"
+          ],
+          "answer": 0,
+          "explanation": "It keeps the image from exceeding its container.",
+          "simpleExplanation": "Remember: It keeps the image from exceeding its container."
+        },
+        {
+          "question": "Common responsive viewport meta tag uses:",
+          "code": null,
+          "options": [
+            "name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"",
+            "responsive=\"true\"",
+            "name=\"screen\" content=\"mobile\"",
+            "width=\"auto\""
+          ],
+          "answer": 0,
+          "explanation": "It helps the layout viewport match the device width.",
+          "simpleExplanation": "Remember: It helps the layout viewport match the device width."
+        },
+        {
+          "question": "Which property smoothly animates a CSS property change?",
+          "code": null,
+          "options": [
+            "transition",
+            "transform-only",
+            "smoothness",
+            "motion-style"
+          ],
+          "answer": 0,
+          "explanation": "transition describes property changes to animate.",
+          "simpleExplanation": "Remember: transition describes property changes to animate."
+        },
+        {
+          "question": "Which property rotates, scales, or translates?",
+          "code": null,
+          "options": [
+            "transform",
+            "transition",
+            "animation-delay",
+            "position"
+          ],
+          "answer": 0,
+          "explanation": "transform supports rotate(), scale(), and translate().",
+          "simpleExplanation": "Remember: transform supports rotate(), scale(), and translate()."
+        },
+        {
+          "question": "Which at-rule defines animation stages?",
+          "code": null,
+          "options": [
+            "@motion",
+            "@keyframes",
+            "@animate",
+            "@frames"
+          ],
+          "answer": 1,
+          "explanation": "@keyframes defines animation stages.",
+          "simpleExplanation": "Remember: @keyframes defines animation stages."
+        },
+        {
+          "question": "Which property specifies animation duration?",
+          "code": null,
+          "options": [
+            "animation-duration",
+            "animation-speed",
+            "keyframe-time",
+            "motion-length"
+          ],
+          "answer": 0,
+          "explanation": "animation-duration controls how long an animation takes.",
+          "simpleExplanation": "Remember: animation-duration controls how long an animation takes."
+        },
+        {
+          "question": "Which property sets transition time?",
+          "code": null,
+          "options": [
+            "transition-duration",
+            "transition-speed",
+            "animation-length-only",
+            "transform-time"
+          ],
+          "answer": 0,
+          "explanation": "transition-duration sets the duration.",
+          "simpleExplanation": "Remember: transition-duration sets the duration."
+        },
+        {
+          "question": "Which property can delay animation start?",
+          "code": null,
+          "options": [
+            "animation-delay",
+            "animation-wait",
+            "start-after",
+            "transition-pause"
+          ],
+          "answer": 0,
+          "explanation": "animation-delay postpones the start.",
+          "simpleExplanation": "Remember: animation-delay postpones the start."
+        },
+        {
+          "question": "Which function clamps a fluid value between min and max?",
+          "code": null,
+          "options": [
+            "clamp()",
+            "responsive()",
+            "fitrange()",
+            "round-only()"
+          ],
+          "answer": 0,
+          "explanation": "clamp(min, preferred, max) is useful for fluid sizing.",
+          "simpleExplanation": "Remember: clamp(min, preferred, max) is useful for fluid sizing."
+        },
+        {
+          "question": "Which property changes the cursor appearance?",
+          "code": null,
+          "options": [
+            "cursor",
+            "mouse-style",
+            "pointer-mode",
+            "hover-type"
+          ],
+          "answer": 0,
+          "explanation": "cursor can use values such as pointer.",
+          "simpleExplanation": "Remember: cursor can use values such as pointer."
+        },
+        {
+          "question": "Why associate labels with form controls?",
+          "code": null,
+          "options": [
+            "Improve usability and accessible naming",
+            "Make inputs red",
+            "Prevent CSS",
+            "Remove keyboard support"
+          ],
+          "answer": 0,
+          "explanation": "Labels help identify controls and support assistive technologies.",
+          "simpleExplanation": "Remember: Labels help identify controls and support assistive technologies."
+        },
+        {
+          "question": "Why is a visible focus indicator important?",
+          "code": null,
+          "options": [
+            "Shows keyboard focus location",
+            "Hides links",
+            "Disables forms",
+            "Changes HTML semantics"
+          ],
+          "answer": 0,
+          "explanation": "Keyboard users need to know which control is focused.",
+          "simpleExplanation": "Remember: Keyboard users need to know which control is focused."
+        },
+        {
+          "question": "Best for reusable site-wide styles?",
+          "code": null,
+          "options": [
+            "Organized external CSS",
+            "Inline styles everywhere",
+            "Repeated IDs",
+            "Browser defaults only"
+          ],
+          "answer": 0,
+          "explanation": "Reusable styles are easier to maintain.",
+          "simpleExplanation": "Remember: Reusable styles are easier to maintain."
+        },
+        {
+          "question": "CSS reset/normalization aims to:",
+          "code": null,
+          "options": [
+            "Manage browser default style differences",
+            "Add JavaScript",
+            "Replace semantic HTML",
+            "Secure a website"
+          ],
+          "answer": 0,
+          "explanation": "It helps reduce inconsistent default styling.",
+          "simpleExplanation": "Remember: It helps reduce inconsistent default styling."
+        },
+        {
+          "question": "Which helps preserve responsive image proportions?",
+          "code": null,
+          "options": [
+            "max-width:100%; height:auto;",
+            "width:9000px;",
+            "overflow:always;",
+            "image-fit:responsive;"
+          ],
+          "answer": 0,
+          "explanation": "height:auto preserves the intrinsic aspect ratio.",
+          "simpleExplanation": "Remember: height:auto preserves the intrinsic aspect ratio."
+        },
+        {
+          "question": "If p { color:blue; } applies with no conflict, text is:",
+          "code": null,
+          "options": [
+            "Blue",
+            "Red",
+            "Transparent",
+            "Random"
+          ],
+          "answer": 0,
+          "explanation": "The declaration sets paragraph text color to blue.",
+          "simpleExplanation": "Remember: The declaration sets paragraph text color to blue."
+        },
+        {
+          "question": "With width:200px and horizontal padding:20px on each side, content-box total width (no border) is:",
+          "code": null,
+          "options": [
+            "200px",
+            "240px",
+            "220px",
+            "160px"
+          ],
+          "answer": 1,
+          "explanation": "The outer width is 200 + 20 + 20 = 240px.",
+          "simpleExplanation": "Remember: The outer width is 200 + 20 + 20 = 240px."
+        },
+        {
+          "question": "ul > li targets:",
+          "code": null,
+          "options": [
+            "Any li anywhere inside ul",
+            "Only direct li children of ul",
+            "First li only",
+            "ul inside li"
+          ],
+          "answer": 1,
+          "explanation": "The child combinator selects direct children.",
+          "simpleExplanation": "Remember: The child combinator selects direct children."
+        },
+        {
+          "question": "opacity:0 does what?",
+          "code": null,
+          "options": [
+            "Makes element transparent but it can still occupy space",
+            "Removes it from layout",
+            "Always removes it from accessibility tree",
+            "Sets width to zero"
+          ],
+          "answer": 0,
+          "explanation": "Opacity affects transparency, not layout participation.",
+          "simpleExplanation": "Remember: Opacity affects transparency, not layout participation."
+        },
+        {
+          "question": "Two equal Grid columns can be declared as:",
+          "code": null,
+          "options": [
+            "grid-template-columns:1fr 1fr;",
+            "grid-columns:2;",
+            "display:flex 2;",
+            "columns:equal;"
+          ],
+          "answer": 0,
+          "explanation": "Two 1fr tracks share available space.",
+          "simpleExplanation": "Remember: Two 1fr tracks share available space."
+        },
+        {
+          "question": "Correct class selector for button:",
+          "code": null,
+          "options": [
+            ".button { }",
+            "#.button { }",
+            "button = .button",
+            "class(button)"
+          ],
+          "answer": 0,
+          "explanation": "A period selects the class.",
+          "simpleExplanation": "Remember: A period selects the class."
+        },
+        {
+          "question": "Which can center a fixed-width block horizontally in normal flow?",
+          "code": null,
+          "options": [
+            "margin-inline:auto;",
+            "text-align:auto;",
+            "align:center;",
+            "position:center;"
+          ],
+          "answer": 0,
+          "explanation": "Auto inline margins can center a constrained block.",
+          "simpleExplanation": "Remember: Auto inline margins can center a constrained block."
+        },
+        {
+          "question": "Which pseudo-class styles visited links?",
+          "code": null,
+          "options": [
+            ":visited",
+            ":past",
+            "::visited",
+            ":clicked"
+          ],
+          "answer": 0,
+          "explanation": "Browsers restrict some visited-link styling for privacy.",
+          "simpleExplanation": "Remember: Browsers restrict some visited-link styling for privacy."
+        },
+        {
+          "question": "Which is a useful focus style selector?",
+          "code": null,
+          "options": [
+            ":focus-visible",
+            ":mouse-only",
+            "::keyboard",
+            ":tab"
+          ],
+          "answer": 0,
+          "explanation": ":focus-visible can show focus styling when useful, including many keyboard interactions.",
+          "simpleExplanation": "Remember: :focus-visible can show focus styling when useful, including many keyboard interactions."
+        },
+        {
+          "question": "Which property controls element transparency, including its contents?",
+          "code": null,
+          "options": [
+            "opacity",
+            "background-color only",
+            "visibility-width",
+            "color-alpha only"
+          ],
+          "answer": 0,
+          "explanation": "opacity applies to the rendered element as a whole.",
+          "simpleExplanation": "Remember: opacity applies to the rendered element as a whole."
+        },
+        {
+          "question": "Which approach is generally best for consistent spacing in Flexbox/Grid?",
+          "code": null,
+          "options": [
+            "gap",
+            "Spaces in HTML",
+            "Repeated br tags",
+            "absolute positioning for every item"
+          ],
+          "answer": 0,
+          "explanation": "gap provides consistent spacing between layout items.",
+          "simpleExplanation": "Remember: gap provides consistent spacing between layout items."
+        },
+        {
+          "question": "Which property sets a minimum width?",
+          "code": null,
+          "options": [
+            "min-width",
+            "width-minimum",
+            "small-width",
+            "width-floor"
+          ],
+          "answer": 0,
+          "explanation": "min-width defines a lower bound for used width.",
+          "simpleExplanation": "Remember: min-width defines a lower bound for used width."
+        },
+        {
+          "question": "What can min-width:0 do for a flex item?",
+          "code": null,
+          "options": [
+            "Allow it to shrink below its automatic minimum size",
+            "Make text bold",
+            "Create a grid",
+            "Set width to zero always"
+          ],
+          "answer": 0,
+          "explanation": "It can prevent overflow by allowing the item to shrink.",
+          "simpleExplanation": "Remember: It can prevent overflow by allowing the item to shrink."
+        },
+        {
+          "question": "Which property is used to add a pointer cursor?",
+          "code": null,
+          "options": [
+            "cursor:pointer",
+            "mouse:pointer",
+            "pointer:true",
+            "hover:hand"
+          ],
+          "answer": 0,
+          "explanation": "cursor:pointer commonly signals an interactive control.",
+          "simpleExplanation": "Remember: cursor:pointer commonly signals an interactive control."
+        },
+        {
+          "question": "What should you do after memorizing CSS MCQs?",
+          "code": null,
+          "options": [
+            "Build pages and practise explaining your code",
+            "Stop all practice",
+            "Study only definitions",
+            "Avoid browser testing"
+          ],
+          "answer": 0,
+          "explanation": "Practical implementation is essential for interview readiness.",
+          "simpleExplanation": "Remember: Practical implementation is essential for interview readiness."
+        }
+      ]
     },
     {
       "id": "javascript",
